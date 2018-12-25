@@ -1,0 +1,19 @@
+.input-file {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #868282;
+    background-color: #F9FAFB;
+}
+.input-file span{
+    float: left;
+}
+.input-file span:hover{
+    cursor: pointer;
+    text-decoration: underline;
+}
+.input-file-header {
+    background-color:#2185d0 ! important;
+    border: 1px solid #2185d0 ! important;
+    color:white ! important;
+    cursor: pointer;
+}

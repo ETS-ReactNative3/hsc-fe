@@ -1,0 +1,39 @@
+/* Flash Message UI */
+.ui.message.defaultStyle{
+  position: fixed;
+  width: 50%!important;
+  margin: auto;
+  top: 0;
+  right: 0;
+  z-index: 10000;
+  -webkit-animation: display 6s;
+  -webkit-animation-delay: 0s;
+  animation: display 5s;
+  animation-delay: 0.25s;
+  opacity: 0;
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes display {
+  0%   {opacity:0;}
+  5%   {opacity:0.25;}
+  10%  {opacity:0.5;}
+  15%  {opacity:0.75;}
+  20%  {opacity:1;}
+  85%  {opacity:0.75;}
+  90%  {opacity:0.5;}
+  95%  {opacity:0.25;}
+  100% {opacity:0;}
+}
+
+@keyframes display {
+  0%   {opacity:0;}
+  5%   {opacity:0.25;}
+  10%  {opacity:0.5;}
+  15%  {opacity:0.75;}
+  20%  {opacity:1;}
+  85%  {opacity:0.75;}
+  90%  {opacity:0.5;}
+  95%  {opacity:0.25;}
+  100% {opacity:0;}
+}

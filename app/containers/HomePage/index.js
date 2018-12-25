@@ -21,10 +21,11 @@ import {
 } from 'containers/App/selectors';
 import H2 from 'components/H2';
 import ReposList from 'components/ReposList';
-import AtPrefix from './AtPrefix';
+import List from 'components/List';
+// import AtPrefix from './AtPrefix';
 import CenteredSection from './CenteredSection';
 import Form from './Form';
-import Input from './Input';
+// import Input from './Input';
 import Section from './Section';
 import messages from './messages';
 import { loadRepos } from '../App/actions';
@@ -51,6 +52,19 @@ export class HomePage extends React.PureComponent {
       error,
       repos,
     };
+    console.log(this.props);
+    const array = [
+      { id: '001', name: '001' },
+      { id: '002', name: '002' },
+      { id: '003', name: '003' },
+      { id: '004', name: '004' },
+      { id: '005', name: '005' },
+    ];
+    const listProps = {
+      loading,
+      error,
+      component: 'hihi',
+    };
 
     return (
       <article>
@@ -71,11 +85,12 @@ export class HomePage extends React.PureComponent {
             </p>
           </CenteredSection>
           <Section>
-            <H2>
+            <List {...listProps} listItem={array} />
+            {/* <H2>
               <FormattedMessage {...messages.trymeHeader} />
-            </H2>
+            </H2> */}
             <Form onSubmit={this.props.onSubmitForm}>
-              <label htmlFor="username">
+              {/* <label htmlFor="username">
                 <FormattedMessage {...messages.trymeMessage} />
                 <AtPrefix>
                   <FormattedMessage {...messages.trymeAtPrefix} />
@@ -87,7 +102,7 @@ export class HomePage extends React.PureComponent {
                   value={this.props.username}
                   onChange={this.props.onChangeUsername}
                 />
-              </label>
+              </label> */}
             </Form>
             <ReposList {...reposListProps} />
           </Section>

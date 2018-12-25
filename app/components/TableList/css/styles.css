@@ -1,0 +1,363 @@
+/* Associate table  */
+.container-list .ui.table thead .search.icon{
+    background-color: #3078C5;
+    color: white;
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .container-list .ui.table .icon.input{
+    width: 70%;
+  }
+  .container-list .ui.table thead input[type="text"]{
+    border-radius: 3px!important;
+  }
+
+  .container-list .ui.table tbody,
+  .container-list .ui.table thead tr:not(:first-child){
+    text-align: left;
+  }
+
+  .tbl-action-icon{
+    background-color: #3078C5;
+    color: white;
+    vertical-align: bottom!important;
+    cursor: pointer;
+  }
+  .container-list .ui.pagination .item.active{
+    background-color: #F2F2F2!important;
+  }
+
+  .container-list.list-list tbody tr td:last-child{
+    text-align: left!important
+  }
+  .ui.icon.input i{
+    pointer-events: auto!important;
+  }
+  a.primary{
+    background-color:#2185d0 !important;
+    color:white !important;
+  }
+  @media only screen and (min-width:769px){
+    .list-action-associate{
+      border-radius: 0px!important;
+    }
+    /* Icon date picker  */
+    .field.relative i{
+      right: 30px!important;
+    }
+  }
+  @media only screen and (max-width:768px){
+    .list-action-associate{
+      border-radius: 0px!important;
+    }
+    /* Icon date picker  */
+    .field.relative i{
+      right: 20px!important;
+    }
+  }
+  @media only screen and (max-width: 549px){
+    .field.relative i{
+      right: 30px!important;
+    }
+  }
+
+  /* Custom horizontal top menu */
+  .list-action-associate .item{
+    width: 14.5%;
+    cursor: pointer;
+  }
+
+  .list-action-associate .item:hover{
+    background-color: #F2F2F2!important;
+  }
+
+  .list-action-associate .item.active{
+    background-color: #F2F2F2!important;
+  }
+
+  /*  Container of button action each page in associate  */
+  .container-btn-action{
+    padding-top: 30px!important;
+    padding-left: 10px!important;
+  }
+  .container-btn-action button{
+    width: 20vw;
+  }
+
+  /*  Container of vehicles block  */
+  .associate-vehicles-block{
+    margin-top: -2rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  .associate-document-block{
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+
+  /*  CSS for Modal  */
+  .footer-modal-actions {
+     height: 65px;
+  }
+  .footer-modal-actions button {
+    width: 30%;
+  }
+
+  .disableOnlyInput textarea{
+    opacity: 0.5;
+    pointer-events: none;
+  }
+
+  .header_large_icon{
+    position: relative;
+    top: -6px;
+  }
+
+  .inline_div{
+    display: inline-block;
+    height: 38px !important;
+    width: 100%;
+  }
+
+  .field.inline_div div.ui.menu{
+    box-shadow: none !important;
+  }
+
+  .field.inline_div a{
+    width: 50%;
+    height: 38px !important;
+    text-align: center;
+    font-weight: bold !important;
+    display: inline-block !important;
+  }
+
+  .inline_flex_div{
+    display: inline-flex;
+    width: 100%;
+  }
+
+  .search_place{
+    float: right;
+    width: 38px;
+    height: 37px;
+    background-color: #3078C5 !important;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    color: white;
+    text-align: center;
+    margin-left: -3px;
+  }
+
+  .search_place i {
+    margin-top: 9px;
+  }
+  .full_width{
+    width:  100%;
+  }
+  .header-list{
+    margin-bottom: 10px!important;
+  }
+  .header-list h2{
+    margin-bottom: 0px;
+    padding-top: 10px;
+  }
+  .sub-header {
+    margin-top: 0;
+    color: #868282;
+  }
+
+  /* Geo Input Style  */
+  .inline_flex_div{
+    display: inline-flex;
+    width: 100%;
+  }
+  .geosuggest_list{
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 25em;
+    padding: 0;
+    margin-top: -1px;
+    margin-left:  14px;
+    margin-right:  48px;
+    background: #fff;
+    border: 1px solid #267dc0;
+    border-top-width: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    list-style: none;
+    z-index: 5;
+    -webkit-transition: max-height 0.2s, border 0.2s;
+    transition: max-height 0.2s, border 0.2s;
+  }
+  .geosuggest_list li{
+    list-style: none;
+  }
+  .geosuggest__item {
+    font-size: 18px;
+    font-size: 1rem;
+    padding: .5em .65em;
+    cursor: pointer;
+  }
+  .geosuggest__item:hover,
+  .geosuggest__item:focus {
+    background: #f5f5f5;
+  }
+  .geosuggest__item--active {
+    background: #267dc0!important;
+    color: #fff!important;
+  }
+  .geosuggest__item--active:hover,
+  .geosuggest__item--active:focus {
+    background: #ccc;
+  }
+  .geosuggest__item__matched-text {
+    font-weight: bold;
+  }
+  .geosuggest__suggests--hidden {
+    max-height: 0;
+    overflow: hidden;
+    border-width: 0;
+  }
+
+  .geosuggest__item {
+    font-size: 18px;
+    font-size: 1rem;
+    padding: 0.5em 0.65em;
+    cursor: pointer;
+  }
+  .geosuggest__item:hover,
+  .geosuggest__item:focus {
+    background: #f5f5f5;
+  }
+  .geosuggest__item--active {
+    background: #267dc0;
+    color: #fff;
+  }
+  .geosuggest__item--active:hover,
+  .geosuggest__item--active:focus {
+    background: #ccc;
+  }
+  .geosuggest__item__matched-text {
+    font-weight: bold;
+  }
+  .redColor{
+    color:#9f3a38 !important;
+  }
+  .errorText {
+    color: red;
+    position: relative;
+    font-size: 10px;
+    margin-top: 0px;
+    width: 100%;
+  }
+
+  /* View style Clienti*/
+  .row-view{
+    padding-top: 5px!important;
+    padding-bottom: 0px!important;
+    margin: 0px 5px 0px 0px;
+  }
+  /* .row-view .column{
+    padding: 1rem 0px 1rem 0px;
+    background-color: #F2F2F2;
+    border-left: 5px solid white;
+    border-top: 10px solid white;
+  } */
+  .row-view .block-name {
+    background-color: white;
+  }
+  .row-view .column.md-space{
+    background-color: white;
+  }
+  .row-view h4{
+    color: #2185d0!important;
+    text-transform: uppercase;
+  }
+  .row-view span{
+    color: black;
+  }
+
+  /* View style Payment Term */
+  .row-view-payment-term{
+    padding-top: 5px!important;
+    padding-bottom: 0px!important;
+    margin: 0px 5px 0px 0px;
+  }
+  .row-view-payment-term .block-name .column {
+    background-color: white;
+  }
+  .row-view-payment-term .column{
+    padding: 1rem 0px 1rem 0px;
+    /* background-color: #F2F2F2; */
+    border-left: 5px solid white;
+    border-top: 10px solid white;
+  }
+  .row-view-payment-term .column.md-space{
+    background-color: white;
+  }
+  .row-view-payment-term h4{
+    color: #2185d0!important;
+    text-transform: uppercase;
+  }
+  .row-view-payment-term span{
+    color: black;
+  }
+  /* Popup Tab styles */
+  .popup-tab .ui.attached.tabular.menu{
+    font-size: 13.5px;
+  }
+  .popup-tab.container-list.content {
+    padding-left: 5px!important;
+    padding-right: 5px!important;
+  }
+
+  .btn-group, .btn-undo {
+    /* width: 202px; */
+    /* padding: 0px; */
+  }
+  .btn-undo {
+    width: 100%;
+  }
+
+  .label-status {
+    padding: 10px;
+    display: inline-block;
+    width: 200px;
+    border-radius: 15px;
+    text-align: center;
+  }
+  .label-add {
+    background-color: #ffff3b;
+  }
+  .label-change {
+    background-color: #FE7A22;
+  }
+  .label-remove {
+    background-color: #ffc5c3;
+  }
+
+/* .table-engine td:last-child {
+  width: 25%;
+} */
+
+.status-process {
+  font-weight: bold;
+  font-size: 16px;
+  text-transform: uppercase;
+  color: green;
+}
+
+.status-process.approved {
+  color: green;
+}
+
+.status-process.rejected {
+  color: red;
+}
+
+.status-process.not-npa-user {
+  color: green;
+}

@@ -1,0 +1,13 @@
+.popup-container .content .ui.grid{
+  width: 200px;
+}
+.popup-container .content .ui.grid .column:hover{
+  cursor: pointer;
+  background-color: #F2F2F2;
+}
+.popup-container .content .ui.grid .column span{
+  padding-left: 10px;
+}
+.popup-container .content .popup-icon{
+  margin-top: -10px;
+}
