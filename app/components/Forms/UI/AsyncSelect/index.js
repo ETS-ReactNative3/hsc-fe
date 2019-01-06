@@ -7,12 +7,10 @@ import { style } from './style';
 import ErrorMessage from '../ErrorMessage';
 import Required from '../Required';
 
-const StyledSelect = styled(Select.Async)`
-  ${style};
-`;
+const StyledSelect = styled(Select.Async)`${style}`;
 
 export class AsyncSelect extends React.Component {
-  handleChange = value => {
+  handleChange = (value) => {
     // this is going to call setFieldValue and manually update values.topcis
     this.props.onChange(this.props.name, value);
   };
@@ -24,13 +22,9 @@ export class AsyncSelect extends React.Component {
 
   render() {
     return (
-      <Form.Field
-        style={this.props.style}
-        className={this.props.error ? 'error' : ''}
-      >
+      <Form.Field style={this.props.style} className={this.props.error ? 'error' : ''}>
         <label htmlFor={this.props.name}>
-          {this.props.label}
-          <Required required={this.props.required} />
+          {this.props.label}<Required required={this.props.required} />
         </label>
         <StyledSelect
           name={this.props.name}
@@ -40,9 +34,7 @@ export class AsyncSelect extends React.Component {
           loadOptions={this.props.loadOptions}
           multi={this.props.multi}
         />
-        {Boolean(this.props.error) && (
-          <ErrorMessage>{this.props.error}</ErrorMessage>
-        )}
+        { Boolean(this.props.error) && <ErrorMessage>{this.props.error}</ErrorMessage>}
       </Form.Field>
     );
   }

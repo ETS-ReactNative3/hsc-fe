@@ -11,11 +11,7 @@ export const EmptyMessage = ({ color, children }) => {
   return <div style={style}>{children}</div>;
 };
 
-export const AddableEmptyMessage = () => (
-  <div style={{ textAlign: 'center', color: '#999', fontSize: 12 }}>
-    <i>- Nessun elemento presente -</i>
-  </div>
-);
+export const AddableEmptyMessage = () => <div style={{ textAlign: 'center', color: '#999', fontSize: 12 }}><i>- Nessun elemento presente -</i></div>;
 
 EmptyMessage.propTypes = {
   children: PropTypes.string,

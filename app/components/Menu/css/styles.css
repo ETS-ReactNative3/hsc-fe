@@ -1,0 +1,40 @@
+.wrapper-menu .menu a:first-child{
+  border-radius: 0px!important;
+  background-color: white!important;
+  height:79px!important;
+  min-height:79px!important; 
+}
+
+.wrapper-menu .menu a:nth-child(2){
+  margin-top: -1px;
+}
+
+.wrapper-menu .menu a.item{
+  border-bottom: 1px solid rgba(255,255,255, .6)!important;
+  margin-right: -1px;
+  margin-left: -1px;
+}
+
+.wrapper-menu .menu a.active.item {
+  background-color: darkgrey !important;
+}
+
+.wrapper-menu .menu {
+  border-bottom: 0px solid!important;
+}
+
+
+.wrapper-menu {
+  width: 150px!important;
+}
+
+.ui.vertical.menu a.item.menu-item-impostazioni {
+  border-radius: 0 0 .28571429rem .28571429rem;
+  position: absolute;
+  border-top: 1px solid #F1F1F1;
+  border-bottom: none !important;
+  border-right: 1px solid #F1F1F1;
+  bottom: 0px;
+  padding-left: 35px! important;
+  padding-right: 36px! important;
+}

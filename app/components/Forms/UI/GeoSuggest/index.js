@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import './css/styles.css';
 
 import ErrorMessage from '../ErrorMessage';
-// import VoE from '../../../../shared/lib/ValidOrEmpty';
+import VoE from '../../../../shared/lib/ValidOrEmpty';
 import Required from '../Required';
 
 export class GeoSuggest extends React.Component {
@@ -15,51 +15,47 @@ export class GeoSuggest extends React.Component {
     this.props = props;
   }
 
-  VoE = data => {
-    console.log(data);
-  };
-
-  handleChange = value => {
+  handleChange = (value) => {
     if (value) {
       if (!value.gmaps) return undefined;
       const components = value.gmaps.address_components;
-      const streetNumber = this.VoE(
-        _.filter(components, item => item.types[0] === 'street_number')[0],
+      const streetNumber = VoE(
+        _.filter((components1, item) => item.types[0] === 'street_number')[0],
         'long_name',
       );
-      const street = this.VoE(
-        _.filter(components, item => item.types[0] === 'route')[0],
+      const street = VoE(
+        _.filter((components1, item) => item.types[0] === 'route')[0],
         'long_name',
       );
       const city =
-        this.VoE(
-          _.filter(components, item => item.types[0] === 'locality')[0],
+        VoE(
+          _.filter((components1, item) => item.types[0] === 'locality')[0],
           'long_name',
         ) ||
-        this.VoE(
+        VoE(
           _.filter(
             components,
-            item => item.types[0] === 'administrative_area_level_1',
+            (item) => item.types[0] === 'administrative_area_level_1',
           )[0],
           'long_name',
         );
-      const provinceShort = this.VoE(
+      const provinceShort = VoE(
         _.filter(
           components,
-          item => item.types[0] === 'administrative_area_level_2',
+          (item) => item.types[0] === 'administrative_area_level_2',
         )[0],
         'short_name',
       );
-      const cap = this.VoE(
-        _.filter(components, item => item.types[0] === 'postal_code')[0],
+      const cap = VoE(
+        _.filter((components1, item) => item.types[0] === 'postal_code')[0],
         'long_name',
       );
-      const country = this.VoE(
-        _.filter(components, item => item.types[0] === 'country')[0],
+      const country = VoE(
+        _.filter((components1, item) => item.types[0] === 'country')[0],
         'long_name',
       );
-      const countryShort = this.VoE(
-        _.filter(components, item => item.types[0] === 'country')[0],
+      const countryShort = VoE(
+        _.filter((components1, item) => item.types[0] === 'country')[0],
         'short_name',
       );
       let item = _.cloneDeep(this.props.element);
@@ -106,7 +102,7 @@ export class GeoSuggest extends React.Component {
             {this.props.label}
             <Required required={this.props.required} />
           </label>
-          <div className="inline_flex_div">
+          <div className={'inline_flex_div'}>
             <Suggest
               autoActivateFirstSuggest
               onBlur={this.handleBlur}
@@ -116,15 +112,16 @@ export class GeoSuggest extends React.Component {
               onSuggestSelect={this.handleChange}
               placeholder={this.props.label}
               className="full_width"
-              suggestsClassName="geosuggest_list"
+              suggestsClassName={'geosuggest_list'}
               name={this.props.name}
             />
             <div className="search_place">
               <Icon name="search" />
             </div>
           </div>
-          {touched[name] &&
-            error[name] && <ErrorMessage>{error[name]}</ErrorMessage>}
+          {touched[name] && error[name] && (
+            <ErrorMessage>{error[name]}</ErrorMessage>
+          )}
         </Form.Field>
       </div>
     );

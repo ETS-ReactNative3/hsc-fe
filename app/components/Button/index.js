@@ -30,7 +30,11 @@ function Button(props) {
     );
   }
 
-  return <Wrapper>{button}</Wrapper>;
+  return (
+    <Wrapper>
+      {button}
+    </Wrapper>
+  );
 }
 
 Button.propTypes = {

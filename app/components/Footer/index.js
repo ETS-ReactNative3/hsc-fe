@@ -1,19 +1,19 @@
 import React from 'react';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
-// import A from 'components/A';
+import A from 'components/A';
 // import LocaleToggle from 'containers/LocaleToggle';
-// import messages from './messages';
 import Wrapper from './Wrapper';
+import messages from './messages';
 
 function Footer() {
   return (
     <Wrapper>
-      {/* <section>
+      <section>
         <FormattedMessage {...messages.licenseMessage} />
       </section>
       <section>
-        <LocaleToggle />
+        {/* <LocaleToggle /> */}
       </section>
       <section>
         <FormattedMessage
@@ -22,7 +22,7 @@ function Footer() {
             author: <A href="https://twitter.com/mxstbr">Max Stoiber</A>,
           }}
         />
-      </section> */}
+      </section>
     </Wrapper>
   );
 }

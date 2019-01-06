@@ -2,9 +2,9 @@ import React from 'react';
 import { Grid, Divider } from 'semantic-ui-react';
 import styled from 'styled-components';
 
-const Column = styled(Grid.Column)`
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
+const Column = styled(Grid.Column) `
+  padding-top:5px!important;
+  padding-bottom:5px!important;
 `;
 
 export default () => (

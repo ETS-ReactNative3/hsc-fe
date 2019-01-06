@@ -11,22 +11,10 @@ const style = {
   borderBottomLeftRadius: 0,
 };
 
-export const inputBtn = props => (
-  <Popup
-    trigger={
-      <Button
-        type="button"
-        icon
-        style={style}
-        onClick={props.action}
-        loading={props.loading}
-      >
-        <Icon name={props.icon} />
-      </Button>
-    }
-    content={props.tooltip}
-  />
-);
+export const inputBtn = (props) => (<Popup
+  trigger={<Button type="button" icon style={style} onClick={props.action} loading={props.loading}><Icon name={props.icon} /></Button>}
+  content={props.tooltip}
+/>);
 
 inputBtn.propTypes = {
   action: PropTypes.func,

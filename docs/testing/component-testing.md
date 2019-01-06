@@ -30,7 +30,7 @@ function Button(props) {
   return (
     <button className="btn" onClick={props.onClick}>
       <CheckmarkIcon />
-      {React.Children.only(props.children)}
+      { React.Children.only(props.children) }
     </button>
   );
 }
@@ -49,7 +49,9 @@ import Button from './Button';
 
 class HomePage extends React.Component {
   render() {
-    return <Button onClick={this.doSomething}>Click me!</Button>;
+    return(
+      <Button onClick={this.doSomething}>Click me!</Button>
+    );
   }
 }
 ```
@@ -58,7 +60,7 @@ _Note: This is a [state**ful** ("smart") component](../js/README.md#architecture
 
 When rendered normally with the standard `ReactDOM.render` function, this will
 be the HTML output
-(_Comments added in parallel to compare structures in HTML from JSX source_):
+(*Comments added in parallel to compare structures in HTML from JSX source*):
 
 ```html
 <button>                           <!-- <Button>             -->
@@ -117,8 +119,12 @@ Lets start with testing that it renders a `<button>`. To do that we first
 
 ```javascript
 it('renders a <button>', () => {
-  const renderedComponent = shallow(<Button />);
-  expect(renderedComponent.find('button').node).toBeDefined();
+  const renderedComponent = shallow(
+    <Button></Button>
+  );
+  expect(
+    renderedComponent.find('button').node
+  ).toBeDefined();
 });
 ```
 
@@ -132,8 +138,12 @@ exists:
 ```javascript
 it('renders its children', () => {
   const text = 'Click me!';
-  const renderedComponent = shallow(<Button>{text}</Button>);
-  expect(renderedComponent.contains(text)).toEqual(true);
+  const renderedComponent = shallow(
+    <Button>{ text }</Button>
+  );
+  expect(
+    renderedComponent.contains(text)
+  ).toEqual(true);
 });
 ```
 
@@ -161,14 +171,22 @@ import Button from '../Button.react';
 
 describe('<Button />', () => {
   it('renders a <button>', () => {
-    const renderedComponent = shallow(<Button />);
-    expect(renderedComponent.find('button').node).toBeDefined();
+    const renderedComponent = shallow(
+      <Button></Button>
+    );
+    expect(
+      renderedComponent.find('button').node
+    ).toBeDefined();
   });
 
   it('renders its children', () => {
     const text = 'Click me!';
-    const renderedComponent = shallow(<Button>{text}</Button>);
-    expect(renderedComponent.contains(text)).toEqual(true);
+    const renderedComponent = shallow(
+      <Button>{ text }</Button>
+    );
+    expect(
+      renderedComponent.contains(text)
+    ).toEqual(true);
   });
 
   it('handles clicks', () => {
@@ -182,4 +200,4 @@ describe('<Button />', () => {
 
 And that's how you unit test your components and make sure they work correctly!
 
-_Continue to learn how to test your components [remotely](remote-testing.md)!_
+*Continue to learn how to test your components [remotely](remote-testing.md)!*

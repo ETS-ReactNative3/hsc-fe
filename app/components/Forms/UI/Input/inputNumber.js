@@ -2,7 +2,6 @@ import React from 'react';
 import { Form, Popup, Icon } from 'semantic-ui-react/dist/commonjs';
 import Cleave from 'cleave.js/react';
 import PropTypes from 'prop-types';
-
 import Required from '../Required';
 import ErrorMessage from '../ErrorMessage';
 
@@ -14,7 +13,7 @@ export default class NumberInput extends React.Component {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     const { name } = this.props;
     const { values } = nextProps;
     if (this.props.values[name] !== values[name]) {
@@ -24,7 +23,7 @@ export default class NumberInput extends React.Component {
     }
   };
 
-  onValueInit = cleave => {
+  onValueInit = (cleave) => {
     this.setState({ cleave });
     const { values, name, defaultValue } = this.props;
     if (defaultValue) cleave.setRawValue(defaultValue);
@@ -47,7 +46,7 @@ export default class NumberInput extends React.Component {
       placeholder,
       blurCallback,
       className,
-    } = this.props,
+    } = this.props
   ) {
     return (
       <Form.Field
@@ -68,9 +67,7 @@ export default class NumberInput extends React.Component {
               >
                 {this.props.tooltip}
               </Popup>
-            ) : (
-              ''
-            )}
+            ) : ''}
           </label>
         ) : null}
         <Cleave
@@ -87,16 +84,15 @@ export default class NumberInput extends React.Component {
             rawValueTrimPrefix: false,
             numeralDecimalScale: 2,
           }}
-          onChange={e => {
+          onChange={(e) => {
             setFieldValue(name, e.target.rawValue);
             if (this.props.onChange) {
               this.props.onChange(name, e.target.rawValue);
             }
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             setFieldValue(name, e.target.rawValue);
-            if (blurCallback && typeof blurCallback === 'function')
-              blurCallback(e);
+            if (blurCallback && typeof blurCallback === 'function') blurCallback(e);
           }}
         />
         {touched[name] &&

@@ -5,17 +5,7 @@ import PropTypes from 'prop-types';
 
 import ErrorMessage from '../ErrorMessage';
 
-export const CheckBox = ({
-  touched,
-  errors,
-  type,
-  name,
-  label,
-  value,
-  checked,
-  disabled,
-  labelRight,
-}) => (
+export const CheckBox = ({ touched, errors, type, name, label, value, checked, disabled, labelRight }) => (
   <Form.Field error={Boolean(touched[name] && errors[name])}>
     <label
       htmlFor={name}
@@ -25,9 +15,7 @@ export const CheckBox = ({
         position: labelRight ? 'relative' : 'inherit',
         right: labelRight ? -3 : 0,
       }}
-    >
-      {label}
-    </label>
+    >{label}</label>
     <Field
       type={type}
       name={name}
@@ -36,8 +24,7 @@ export const CheckBox = ({
       disabled={disabled}
       style={{ float: labelRight ? 'left' : 'none' }}
     />
-    {touched[name] &&
-      errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+    {touched[name] && errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
   </Form.Field>
 );
 
@@ -54,3 +41,4 @@ CheckBox.propTypes = {
 };
 
 export default CheckBox;
+

@@ -7,30 +7,10 @@ import Required from '../Required';
 import ErrorMessage from '../ErrorMessage';
 import InputBtn from './inputBtn';
 
-export const Input = ({
-  touched,
-  errors,
-  type,
-  name,
-  label,
-  checked,
-  disabled,
-  required,
-  style,
-  placeholder,
-  onBlur,
-  uppercase,
-  btn,
-  className,
-}) => (
+export const Input = ({ touched, errors, type, name, label, checked, disabled, required, style, placeholder, onBlur, uppercase, btn, className }) => (
   <div>
     <Form.Field error={Boolean(touched[name] && errors[name])} style={style}>
-      {label ? (
-        <label htmlFor={name}>
-          {label}
-          <Required required={required} />
-        </label>
-      ) : null}
+      {label ? <label htmlFor={name}>{label}<Required required={required} /></label> : null}
       <Field
         className={className}
         type={type}
@@ -38,9 +18,9 @@ export const Input = ({
         checked={checked}
         disabled={disabled}
         placeholder={placeholder}
-        onFocus={e => e.target.setAttribute('autocomplete', 'off')}
+        onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
         onBlur={onBlur}
-        onKeyPress={event => {
+        onKeyPress={(event) => {
           if (type && type === 'number' && event.which === 101) {
             event.preventDefault();
           } else if (type && type === 'number' && event.which === 69) {
@@ -50,8 +30,7 @@ export const Input = ({
         style={uppercase ? { textTransform: 'uppercase' } : {}}
       />
       {btn && <InputBtn {...btn} />}
-      {touched[name] &&
-        errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
+      {touched[name] && errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
     </Form.Field>
   </div>
 );
@@ -69,7 +48,10 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onBlur: PropTypes.func,
   uppercase: PropTypes.bool,
-  btn: PropTypes.oneOfType([PropTypes.object, PropTypes.bool]),
+  btn: PropTypes.oneOfType([
+    PropTypes.object,
+    PropTypes.bool,
+  ]),
   className: PropTypes.string,
 };
 

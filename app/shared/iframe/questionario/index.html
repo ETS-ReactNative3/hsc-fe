@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/formiojs@latest/dist/formio.full.min.css">
+    <script src="https://unpkg.com/formiojs@latest/dist/formio.full.min.js"></script>
+    <script type="text/javascript">
+      window.onload = function() {
+        Formio.createForm(document.getElementById('formio'), 'https://ws-test.geniodiligence.it/questionari/antiriciclaggio_old', {
+          hooks: {
+            beforeSubmit: (submission, next) => {
+              // Make a custom ajax call.
+              $.ajax({
+                url: 'https://myserver.com/validate',
+                method: 'POST',
+                data: submission,
+                complete: (errors) => {
+                  let submitErrors = null;
+                  if (errors) {
+                    submitErrors = [];
+                    errors.forEach((error) => {
+                      submitErrors.push({
+                        message: error.toString()
+                      });
+                    });
+                  }
+                  // next(submitErrors); // next() propaga i dati agli hook successivi, bloccato
+                }
+              });
+            }
+          }
+          })
+      };
+    </script>
+  </head>
+  <body>
+    <div id="formio"></div>
+  </body>
+</html>

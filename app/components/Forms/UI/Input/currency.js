@@ -35,7 +35,7 @@ export default class Currency extends React.Component {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     const { name } = this.props;
     const { values } = nextProps;
     if (this.props.values && this.props.values[name] !== values[name]) {
@@ -43,7 +43,7 @@ export default class Currency extends React.Component {
     }
   };
 
-  onValueInit = cleave => {
+  onValueInit = (cleave) => {
     this.setState({ cleave });
     const { values, name, defaultValue } = this.props;
     if (defaultValue) cleave.setRawValue(defaultValue);
@@ -67,7 +67,7 @@ export default class Currency extends React.Component {
       blurCallback,
       noEuro,
       className,
-    } = this.props,
+    } = this.props
   ) {
     return (
       <Form.Field
@@ -107,14 +107,12 @@ export default class Currency extends React.Component {
             prefix: noEuro ? '' : '€         ',
             rawValueTrimPrefix: true,
           }}
-          onBlur={e => {
+          onBlur={(e) => {
             setFieldValue(name, e.target.rawValue);
-            if (blurCallback && typeof blurCallback === 'function')
-              blurCallback(e);
+            if (blurCallback && typeof blurCallback === 'function') blurCallback(e);
           }}
         />
-        {touched &&
-          touched[name] &&
+        {touched && touched[name] &&
           errors[name] && <ErrorMessage>{errors[name]}</ErrorMessage>}
       </Form.Field>
     );

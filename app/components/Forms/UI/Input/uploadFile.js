@@ -7,27 +7,21 @@ import Required from '../Required';
 import './css/styles.css';
 
 const CustomeGrid = styled(Grid)`
-  margin-left: 0px !important;
+  margin-left: 0px!important;
 `;
 export class CustomUpload extends React.Component {
-  handleChange = event => {
+  handleChange = (event) => {
     this.props.onChange(this.props.name, event.target.files[0]);
   };
 
   render() {
     return (
-      <Form.Field
-        error={Boolean(
-          this.props.touched[this.props.name] &&
-            this.props.errors[this.props.name],
-        )}
-      >
-        {this.props.label ? (
+      <Form.Field error={Boolean(this.props.touched[this.props.name] && this.props.errors[this.props.name])}>
+        {this.props.label ?
           <label htmlFor={this.props.name}>
-            {this.props.label}
-            <Required required={this.props.required} />
+            {this.props.label}<Required required={this.props.required} />
           </label>
-        ) : null}
+          : null}
         <CustomeGrid>
           <Grid.Row columns={2}>
             <Grid.Column
@@ -36,9 +30,7 @@ export class CustomUpload extends React.Component {
               largeScreen={6}
               mobile={16}
               className="input-file input-file-header"
-              onClick={() => {
-                document.getElementById(this.props.name).click();
-              }}
+              onClick={() => { document.getElementById(this.props.name).click(); }}
             >
               <h4>UPLOAD</h4>
             </Grid.Column>
@@ -62,9 +54,7 @@ export class CustomUpload extends React.Component {
           value={this.props.value}
           style={{ display: 'none' }}
         />
-        {Boolean(this.props.touched[this.props.name]) && (
-          <ErrorMessage>{this.props.errors[this.props.name]}</ErrorMessage>
-        )}
+        {Boolean(this.props.touched[this.props.name]) && <ErrorMessage>{this.props.errors[this.props.name]}</ErrorMessage>}
       </Form.Field>
     );
   }

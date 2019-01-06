@@ -7,29 +7,22 @@ class FlashMessage extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = {
-      info: this.props.info,
-    };
   }
-
   render() {
-    const { info } = this.state;
-    const className = info.isSuccess
-      ? 'defaultStyle success'
-      : 'defaultStyle negative';
+    const info = this.props.info;
+    const className = info.isSuccess ? 'defaultStyle success' : 'defaultStyle negative';
     let icon = 'circle outline';
     if (info.icon) {
       icon += ' ';
       icon += info.icon;
     }
-    const msgModal = (
-      <Message
+    const msgModal =
+      (<Message
         className={className}
         icon={<Icon size="big" name={icon} style={{ marginTop: '-9px' }} />}
         header={info.isSuccess ? 'Successo' : 'Fallimento'}
         content={info.content}
-      />
-    );
+      />);
     return msgModal;
   }
 }
@@ -45,7 +38,7 @@ FlashMessage.defaultProps = {
 FlashMessage.propTypes = {
   info: PropTypes.shape({
     icon: PropTypes.string,
-    isSuccess: PropTypes.bool,
+    isSuccess: PropTypes.boolean,
     content: PropTypes.string,
   }),
 };

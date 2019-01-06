@@ -15,22 +15,19 @@ export class CustomDropdown extends React.Component {
   render() {
     return (
       <Form.Field
-        error={Boolean(
-          this.props.touched &&
-            this.props.touched[this.props.name] &&
-            this.props.errors[this.props.name],
-        )}
+        error={
+          Boolean(this.props.touched && this.props.touched[this.props.name] &&
+          this.props.errors[this.props.name])
+        }
       >
-        {this.props.label ? (
+        {this.props.label ?
           <label htmlFor={this.props.name}>
-            {this.props.label}
-            <Required required={this.props.required} />
-          </label>
-        ) : null}
+            {this.props.label}<Required required={this.props.required} />
+          </label> : null}
         <Dropdown
           fluid
           id={this.props.id}
-          onFocus={e => e.target.setAttribute('autocomplete', 'nope')}
+          onFocus={(e) => e.target.setAttribute('autocomplete', 'nope')}
           multiple={this.props.multiple}
           selection
           search
@@ -41,16 +38,10 @@ export class CustomDropdown extends React.Component {
           options={this.props.options}
           style={this.props.style}
           defaultValue={this.props.defaultValue}
-          className={
-            !this.props.className
-              ? 'relative'
-              : `relative ${this.props.className}`
-          }
+          className={!this.props.className ? 'relative' : (`relative ${this.props.className}`)}
           disabled={this.props.disabled}
         />
-        {Boolean(this.props.touched && this.props.touched[this.props.name]) && (
-          <ErrorMessage>{this.props.errors[this.props.name]}</ErrorMessage>
-        )}
+        { Boolean(this.props.touched && this.props.touched[this.props.name]) && <ErrorMessage>{this.props.errors[this.props.name]}</ErrorMessage>}
       </Form.Field>
     );
   }

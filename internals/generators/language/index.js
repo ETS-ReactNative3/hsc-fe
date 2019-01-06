@@ -2,7 +2,7 @@
  * Language Generator
  */
 const fs = require('fs');
-const { exec } = require('child_process');
+const exec = require('child_process').exec;
 
 function languageIsSupported(language) {
   try {
@@ -15,31 +15,26 @@ function languageIsSupported(language) {
 
 module.exports = {
   description: 'Add a language',
-  prompts: [
-    {
-      type: 'input',
-      name: 'language',
-      message:
-        'What is the language you want to add i18n support for (e.g. "fr", "de")?',
-      default: 'fr',
-      validate: value => {
-        if (/.+/.test(value) && value.length === 2) {
-          return languageIsSupported(value)
-            ? `The language "${value}" is already supported.`
-            : true;
-        }
+  prompts: [{
+    type: 'input',
+    name: 'language',
+    message: 'What is the language you want to add i18n support for (e.g. "fr", "de")?',
+    default: 'fr',
+    validate: (value) => {
+      if ((/.+/).test(value) && value.length === 2) {
+        return languageIsSupported(value) ? `The language "${value}" is already supported.` : true;
+      }
 
-        return '2 character language specifier is required';
-      },
+      return '2 character language specifier is required';
     },
-  ],
+  }],
 
   actions: () => {
     const actions = [];
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(const ..LocaleData = require\('react-intl\/locale-data\/..'\);\n)+/g,
+      pattern: /('react-intl\/locale-data\/[a-z]+';\n)(?!.*'react-intl\/locale-data\/[a-z]+';)/g,
       templateFile: './language/intl-locale-data.hbs',
     });
     actions.push({
@@ -51,7 +46,7 @@ module.exports = {
     actions.push({
       type: 'modify',
       path: '../../app/i18n.js',
-      pattern: /(const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)(?!const ..TranslationMessages = require\('\.\/translations\/..\.json'\);\n)/g,
+      pattern: /(from\s'.\/translations\/[a-z]+.json';\n)(?!.*from\s'.\/translations\/[a-z]+.json';)/g,
       templateFile: './language/translation-messages.hbs',
     });
     actions.push({
@@ -78,14 +73,18 @@ module.exports = {
       pattern: /(import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),\n)(?!.*import\('intl\/locale-data\/jsonp\/[a-z]+\.js'\),)/g,
       templateFile: './language/polyfill-intl-locale.hbs',
     });
-    actions.push(() => {
-      const cmd = 'npm run extract-intl';
-      exec(cmd, (err, result) => {
-        if (err) throw err;
-        process.stdout.write(result);
-      });
-      return 'modify translation messages';
-    });
+    actions.push(
+      () => {
+        const cmd = 'npm run extract-intl';
+        exec(cmd, (err, result, stderr) => {
+          if (err || stderr) {
+            throw err || stderr;
+          }
+          process.stdout.write(result);
+        });
+        return 'modify translation messages';
+      }
+    );
 
     return actions;
   },

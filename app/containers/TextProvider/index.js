@@ -27,9 +27,7 @@ export const formatMessage = (type, name, action, customObj) => {
         msg = `${name} deve avere ${customObj.rqLength} caratteri`;
         break;
       case 'between':
-        msg = `${name} deve avere tra ${customObj.min} e ${
-          customObj.max
-        } caratteri`;
+        msg = `${name} deve avere tra ${customObj.min} e ${customObj.max} caratteri`;
         break;
       case 'minLength':
         msg = `${name} deve avere almeno ${customObj.minLength} caratteri`;

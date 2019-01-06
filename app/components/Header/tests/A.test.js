@@ -1,14 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import renderer from 'react-test-renderer';
-import 'jest-styled-components';
+import { mount, render } from 'enzyme';
 
 import A from '../A';
 
 describe('<A />', () => {
-  it('should match the snapshot', () => {
-    const renderedComponent = renderer.create(<A />).toJSON();
-    expect(renderedComponent).toMatchSnapshot();
+  it('should render an <a> tag', () => {
+    const renderedComponent = render(<A />);
+    expect(renderedComponent.find('a').length).toEqual(1);
   });
 
   it('should have a className attribute', () => {
@@ -23,7 +21,7 @@ describe('<A />', () => {
   });
 
   it('should not adopt an invalid attribute', () => {
-    const renderedComponent = mount(<A attribute="test" />);
+    const renderedComponent = mount(<A attribute={'test'} />);
     expect(renderedComponent.find('a').prop('attribute')).toBeUndefined();
   });
 });
