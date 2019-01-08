@@ -1,7 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Image } from 'semantic-ui-react';
-import './css/style.css';
+// import styled from 'styled-components';
+
+// import custom column to render
+// const CusColumn = styled(Grid.Column)`
+//   border: 1px solid black;
+// `;
 
 export class CustomGrid extends React.Component {
   constructor(props) {
@@ -25,41 +30,32 @@ export class CustomGrid extends React.Component {
     const arrData = [];
     gridData.forEach((item, idx) => {
       const columnGrid = (
-        <Grid.Column key={item.key ? item.key : idx} className="grid-event-column" width={5}>
-          <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
-          {item.name}
-          <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
-        </Grid.Column>
+        <Grid columns={1} celled>
+          <Grid.Row key={item.key ? item.key : idx}>
+            <Grid.Column width={4}>
+              <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+            </Grid.Column>
+            <Grid.Column width={9}>
+              {item.name}
+            </Grid.Column>
+            <Grid.Column width={3}>
+              <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
       );
       arrData.push(columnGrid);
     });
-    const lastColumn = (key) => {
-      const tmpKey = `last-column-${key}`;
-      return (
-        <Grid.Column key={tmpKey} className="last-column-event" width={5}>
-        </Grid.Column>
-      );
-    };
-    if (arrData.length % 3 === 2) {
-      arrData.push(lastColumn(1));
-    } else if (arrData.length % 3 === 1) {
-      arrData.push(lastColumn(1));
-      arrData.push(lastColumn(2));
-    }
-    const rowData = (
-      <Grid.Row columns={3} width={15}>
-        {arrData}
-      </Grid.Row>
-    );
-    return rowData;
+    return arrData;
   }
 
   render() {
+    // const { gridData } = this.state;
     const tableList = this.prepareDataToRender();
     return (
-      <Grid columns={1}>
+      <div>
         {tableList}
-      </Grid>
+      </div>
     );
   }
 }
