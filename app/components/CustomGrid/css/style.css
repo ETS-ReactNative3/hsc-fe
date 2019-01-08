@@ -1,0 +1,14 @@
+/* format css for event grid */
+.five.wide.column.grid-event-column {
+    box-shadow: 0 0 0 1px #d4d4d5;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin: 5px auto;
+}
+/* Fake column*/
+.five.wide.column.last-column-event {
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+    margin: 5px auto;
+}
+

@@ -12,6 +12,7 @@ import styled from 'styled-components';
 // import { Redirect } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 // import CustomMenu from 'components/Menu';
 // import CustomLogout from 'components/DropdownLogout';
