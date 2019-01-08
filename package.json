@@ -316,6 +316,7 @@
     "prettier": "1.15.3",
     "react-downloadbutton": "^1.0.0",
     "react-file-uploader": "^1.0.0",
+    "react-responsive-carousel": "^3.1.45",
     "react-test-renderer": "15.6.1",
     "redux-first-router": "0.0.16-next",
     "rimraf": "2.6.1",

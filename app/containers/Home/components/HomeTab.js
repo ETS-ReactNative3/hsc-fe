@@ -1,6 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { Grid, Tab, Table } from 'semantic-ui-react';
+import { Carousel } from 'react-responsive-carousel';
 import './css/styles.css';
 import { CustomGrid } from '../../../components/CustomGrid';
 // import CustomGrid from '../../../components/CustomGrid';
@@ -50,6 +51,20 @@ class HomeTab extends React.Component {
         render: () => (
           <Tab.Pane>
             <CustomGrid listItem={this.state.listItemDemo} />
+            <Carousel>
+              <div>
+                <img alt="car1" src="https://react.semantic-ui.com/images/wireframe/image.png" />
+                <p className="legend">Legend 1</p>
+              </div>
+              <div>
+                <img alt="car2" src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+                <p className="legend">Legend 2</p>
+              </div>
+              <div>
+                <img alt="car3" src="https://react.semantic-ui.com/images/wireframe/image.png" />
+                <p className="legend">Legend 3</p>
+              </div>
+            </Carousel>
           </Tab.Pane>
         ),
       },
