@@ -12,3 +12,30 @@
     margin: 5px auto;
 }
 
+/* Dimmer hover*/
+.hover-view-event {
+    display: none;
+    width: 100%;
+    height: 60%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #000;
+    opacity: 0.8;
+    z-index: 9999;
+    box-shadow: 0 0 0 1px #d4d4d5;
+}
+
+button.ui.button.btn-action-view {
+    background: rgb(0, 83, 156);
+    color: white;
+    padding: 20px 50px;
+    position: absolute;
+    left: 32%;
+    top: 40%;
+    z-index: 99999;
+}
+
+.grid-event-column:hover .hover-view-event {
+    display: block;
+}

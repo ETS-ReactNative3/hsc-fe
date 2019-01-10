@@ -30,7 +30,9 @@
   width: 100%;
   overflow: hidden;
   height: 4rem;
-  background-color: rgba(0, 0, 0, 0.9);
+  /* DEFAULT */
+  /* background-color: rgba(0, 0, 0, 0.9); */
+  background-color: #00539C;
   padding-left: 100%;
   box-sizing: content-box;
 }

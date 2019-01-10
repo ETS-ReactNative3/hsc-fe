@@ -36,15 +36,56 @@ class App extends React.Component {
     super(props);
     this.state = {
       isAuthenticate: false,
+      tikerData: [],
     };
   }
   componentWillMount() {
+    this.getDataForTicker();
+  }
+
+  getDataForTicker = () => {
+    const tickerData = [
+      { key: 1, name: 'VIC', value: '7.6' },
+      { key: 2, name: 'VNM', value: '8.1' },
+      { key: 3, name: 'VCB', value: '7.6' },
+      { key: 4, name: 'GAS', value: '6.5' },
+      { key: 5, name: 'SAB', value: '6.7' },
+      { key: 6, name: 'MSN', value: '6.8' },
+      { key: 7, name: 'CTG', value: '5.2' },
+      { key: 8, name: 'VRE', value: '5.7' },
+      { key: 9, name: 'PLX', value: '5.8' },
+      { key: 10, name: 'HPG', value: '5.5' },
+      { key: 11, name: 'VJC', value: '5.9' },
+      { key: 12, name: 'NVL', value: '8.1' },
+      { key: 13, name: 'VPB', value: '7.6' },
+      { key: 14, name: 'MBB', value: '6.5' },
+      { key: 15, name: 'MWG', value: '6.7' },
+      { key: 16, name: 'FPT', value: '6.8' },
+      { key: 17, name: 'STB', value: '5.2' },
+      { key: 18, name: 'ROS', value: '5.7' },
+      { key: 19, name: 'PNJ', value: '5.8' },
+      { key: 20, name: 'SSI', value: '5.5' },
+      { key: 21, name: 'SBT', value: '5.9' },
+      { key: 22, name: 'DHG', value: '8.1' },
+      { key: 23, name: 'REE', value: '7.6' },
+      { key: 24, name: 'DPM', value: '6.5' },
+      { key: 25, name: 'GMD', value: '6.7' },
+      { key: 26, name: 'CII', value: '6.8' },
+      { key: 27, name: 'KDC', value: '5.2' },
+      { key: 28, name: 'BMP', value: '5.7' },
+      { key: 29, name: 'HSG', value: '5.8' },
+      { key: 30, name: 'CHB', value: '9.9' },
+    ];
+    this.setState({
+      tickerData,
+    });
   }
 
   logoutFunc() {
     localStorage.clear();
     window.location.href = '/login';
   }
+
   selectChild(routeType) {
     // const authToken = localStorage.getItem('authToken');
     if (routeType === '/') {
@@ -56,6 +97,7 @@ class App extends React.Component {
   }
   render() {
     const { history } = this.props;
+    const { tickerData } = this.state;
     const isLoginPage = Object.keys(this.props.authenticate).length > 0 && this.props.authenticate.data.access_token ? 0 : 1;
     // const userName = localStorage.getItem('username');
     // const userRole = 'Admin';
@@ -111,7 +153,7 @@ class App extends React.Component {
                   </Grid.Column>
                 </Grid.Row>
               </Grid.Column>
-              <PureTicker />
+              <PureTicker tickerData={tickerData} />
             </Grid.Row>
           </Grid>
         </div>

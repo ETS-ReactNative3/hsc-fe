@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid, Image, Button } from 'semantic-ui-react';
 import './css/style.css';
 
 export class CustomGrid extends React.Component {
@@ -29,6 +29,9 @@ export class CustomGrid extends React.Component {
           <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
           {item.name}
           <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+          <div className="hover-view-event">
+            <Button className="btn-action-view" content="View" onClick={() => this.props.clickToOpen()} />
+          </div>
         </Grid.Column>
       );
       arrData.push(columnGrid);
@@ -66,6 +69,7 @@ export class CustomGrid extends React.Component {
 
 CustomGrid.propTypes = {
   listItem: PropTypes.any,
+  clickToOpen: PropTypes.func,
 };
 
 export default CustomGrid;
