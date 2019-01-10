@@ -5,7 +5,6 @@ import { Carousel } from 'react-responsive-carousel';
 import './css/styles.css';
 import { CustomGrid } from '../../../components/CustomGrid';
 // import CustomGrid from '../../../components/CustomGrid';
-
 class HomeTab extends React.Component {
   constructor(props) {
     super(props);
@@ -44,13 +43,12 @@ class HomeTab extends React.Component {
   };
 
   render() {
-    const { activeIndex, activeName } = this.state;
+    const { activeIndex } = this.state;
     const panes = [
       {
-        menuItem: 'Home',
+        menuItem: 'Events',
         render: () => (
           <Tab.Pane>
-            <CustomGrid listItem={this.state.listItemDemo} />
             <Carousel>
               <div>
                 <img alt="car1" src="https://react.semantic-ui.com/images/wireframe/image.png" />
@@ -65,11 +63,12 @@ class HomeTab extends React.Component {
                 <p className="legend">Legend 3</p>
               </div>
             </Carousel>
+            <CustomGrid listItem={this.state.listItemDemo} />
           </Tab.Pane>
         ),
       },
       {
-        menuItem: 'Features',
+        menuItem: 'Upcoming events',
         render: () => (
           <Tab.Pane>
             <Table celled inverted selectable>
@@ -111,10 +110,10 @@ class HomeTab extends React.Component {
             {/* <Grid.Column computer={2} tablet={2} largeScreen={1} mobile={2}>
               <Icon name="id card" size="huge" />
             </Grid.Column> */}
-            <Grid.Column computer={16} tablet={16} largeScreen={16} mobile={16}>
-              <h2>HSC {activeName}</h2>
-              <span>Test HSC {activeName}</span>
-            </Grid.Column>
+            {/* <Grid.Column computer={16} tablet={16} largeScreen={16} mobile={16}> */}
+            {/* <h2>HSC {activeName}</h2>
+              <span>Test HSC {activeName}</span> */}
+            {/* </Grid.Column> */}
           </Grid.Row>
         </Grid>
         <Tab

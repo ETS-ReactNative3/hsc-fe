@@ -1,0 +1,30 @@
+.app-container {
+    width: 50%;
+}
+
+.app-left-container, .app-right-container {
+    width: 15%;
+    height: 1000px;
+    float: left;
+}
+
+.app-center-container {
+    width: 70%;
+    float: left;
+}
+
+.carousel.carousel-slider {
+    width: 100%;
+    max-height: 400px;
+    height: 400px;
+}
+
+.carousel .control-dots {
+    margin-left: -20px !important;
+}
+
+.slider-wrapper.axis-horizontal, ul.slider.animated, li.slide, ul.slider.animated li.slide div img {
+    max-height: 400px;
+    height: 400px;
+}
+

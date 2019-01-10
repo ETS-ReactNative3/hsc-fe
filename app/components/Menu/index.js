@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Menu, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 // import { Route, browserHistory } from 'react-router';
-import './css/styles.css';
+// import './css/styles.css';
 
 class CustomMenu extends Component {
   constructor(props) {
@@ -51,7 +51,7 @@ class CustomMenu extends Component {
     const tmpPathName = this.props.location.pathname.split('/')[1];
     let activeMenu = tmpPathName;
     if (activeMenu === null) {
-      activeMenu = 'anagrafiche';
+      activeMenu = 'editorials';
     }
 
     const listMenu = [];
@@ -63,6 +63,7 @@ class CustomMenu extends Component {
           name={menuItem.key}
           active={activeMenu === menuItem.key}
           onClick={this.handleItemClick}
+          style={{ width: '25%' }}
         >
           <Icon name={menuItem.icon} />
           <p className="wrapper-menu-p">{menuItem.name}</p>
@@ -87,17 +88,17 @@ class CustomMenu extends Component {
     });
 
     return (
-      <div className="wrapper-menu">
-        <Menu icon="labeled" vertical stackable={false}>
-          <Menu.Item
-            onClick={this.handleDisplayMenu}
-            style={{ margin: -1, marginBottom: 1 }}
-          >
-            <Image alt={''} src="/logohsc.png" />
-          </Menu.Item>
-          {listMenu}
-        </Menu>
-      </div>
+      // <div className="wrapper-menu">
+      <Menu icon="labeled" stackable={false}>
+        <Menu.Item
+          onClick={this.handleDisplayMenu}
+          style={{ margin: -1, marginBottom: 1, width: '25%' }}
+        >
+          <Image alt={''} src="/logohsc.png" />
+        </Menu.Item>
+        {listMenu}
+      </Menu>
+      // </div>
     );
   }
 }
