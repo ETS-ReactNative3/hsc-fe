@@ -29,7 +29,7 @@
   bottom: 0;
   width: 100%;
   overflow: hidden;
-  height: 4rem;
+  height: 2.5rem;
   /* DEFAULT */
   /* background-color: rgba(0, 0, 0, 0.9); */
   background-color: #00539C;
@@ -38,8 +38,8 @@
 }
 .ticker-wrap .ticker {
   display: inline-block;
-  height: 4rem;
-  line-height: 4rem;
+  height: 2.5rem;
+  line-height: 2.5rem;
   white-space: nowrap;
   padding-right: 100%;
   box-sizing: content-box;

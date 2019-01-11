@@ -26,11 +26,11 @@ export class CustomGrid extends React.Component {
     gridData.forEach((item, idx) => {
       const columnGrid = (
         <Grid.Column key={item.key ? item.key : idx} className="grid-event-column" width={5}>
-          <Image src="https://react.semantic-ui.com/images/wireframe/image.png" />
+          <Image height="220px" src={item.imgUrl} />
           {item.name}
           <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
           <div className="hover-view-event">
-            <Button className="btn-action-view" content="View" onClick={() => this.props.clickToOpen()} />
+            <Button className="btn-action-view" content="View" onClick={() => this.props.clickToOpen(item)} />
           </div>
         </Grid.Column>
       );

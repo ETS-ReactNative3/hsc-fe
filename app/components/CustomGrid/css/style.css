@@ -14,9 +14,9 @@
 
 /* Dimmer hover*/
 .hover-view-event {
-    display: none;
+    /* display: none; */
     width: 100%;
-    height: 60%;
+    height: 0;
     position: absolute;
     bottom: 0;
     left: 0;
@@ -24,8 +24,11 @@
     opacity: 0.8;
     z-index: 9999;
     box-shadow: 0 0 0 1px #d4d4d5;
+    transition-property: height;
+    transition-duration: 1s;
 }
-
+/* TODO */
+/* To do fix button responsive and tranform of dimmer*/
 button.ui.button.btn-action-view {
     background: rgb(0, 83, 156);
     color: white;
@@ -33,9 +36,18 @@ button.ui.button.btn-action-view {
     position: absolute;
     left: 32%;
     top: 40%;
+    border-radius: 10px;
     z-index: 99999;
+    display: none;
+    transition-property: display;
+    transition-duration: 2s;
 }
 
 .grid-event-column:hover .hover-view-event {
+    display: block;
+    height: 60%;
+}
+
+.hover-view-event:hover button.ui.button.btn-action-view{
     display: block;
 }

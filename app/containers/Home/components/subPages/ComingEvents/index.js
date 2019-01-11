@@ -1,11 +1,7 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
-import { Grid, Tab } from 'semantic-ui-react';
-import './css/styles.css';
-import Events from './subPages/Events/index';
-import ComingEvent from './subPages/ComingEvents/index';
-// import CustomGrid from '../../../components/CustomGrid';
-class HomeTab extends React.Component {
+import { Grid, Table } from 'semantic-ui-react';
+class ComingEvent extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -13,13 +9,6 @@ class HomeTab extends React.Component {
       activeIndex: 0,
       activeName: 'Viet Ngu',
       isReloadList: false,
-      listItemDemo: [
-        { key: 1, id: 1, name: 'one' },
-        { key: 2, id: 2, name: 'two' },
-        { key: 3, id: 3, name: 'three' },
-        { key: 4, id: 4, name: 'four' },
-        { key: 5, id: 5, name: 'five' },
-      ],
     };
   }
 
@@ -43,26 +32,6 @@ class HomeTab extends React.Component {
   };
 
   render() {
-    const { activeIndex } = this.state;
-    const panes = [
-      {
-        menuItem: 'Events',
-        render: () => (
-          <Tab.Pane>
-            <Events />
-          </Tab.Pane>
-        ),
-      },
-      {
-        menuItem: 'Upcoming events',
-        render: () => (
-          <Tab.Pane>
-            <ComingEvent />
-          </Tab.Pane>
-        ),
-      },
-    ];
-
     return (
       <div>
         <Grid className="header-list">
@@ -76,19 +45,40 @@ class HomeTab extends React.Component {
             {/* </Grid.Column> */}
           </Grid.Row>
         </Grid>
-        <Tab
-          menu={{ secondary: true, pointing: true }}
-          panes={panes}
-          activeIndex={activeIndex}
-          onTabChange={this.handleTabChange}
-        />
+        <Table celled inverted selectable>
+          <Table.Header>
+            <Table.Row>
+              <Table.HeaderCell>Name</Table.HeaderCell>
+              <Table.HeaderCell>Status</Table.HeaderCell>
+              <Table.HeaderCell>Notes</Table.HeaderCell>
+            </Table.Row>
+          </Table.Header>
+
+          <Table.Body>
+            <Table.Row>
+              <Table.Cell>John</Table.Cell>
+              <Table.Cell>Approved</Table.Cell>
+              <Table.Cell textAlign="right">None</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>Jamie</Table.Cell>
+              <Table.Cell>Approved</Table.Cell>
+              <Table.Cell textAlign="right">Requires call</Table.Cell>
+            </Table.Row>
+            <Table.Row>
+              <Table.Cell>Jill</Table.Cell>
+              <Table.Cell>Denied</Table.Cell>
+              <Table.Cell textAlign="right">None</Table.Cell>
+            </Table.Row>
+          </Table.Body>
+        </Table>
       </div>
     );
   }
 }
 
-HomeTab.propTypes = {
+ComingEvent.propTypes = {
   // elementId: PropTypes.string,
 };
 
-export default HomeTab;
+export default ComingEvent;

@@ -1,0 +1,17 @@
+/* modal add event action*/
+.actions.register-event-action {
+    position: relative;
+    padding: 2rem 1rem !important;
+}
+
+.actions.register-event-action button.ui.icon.left.floated.right.labeled.button {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
+.actions.register-event-action button.ui.icon.primary.right.floated.right.labeled.button.register-event-action-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

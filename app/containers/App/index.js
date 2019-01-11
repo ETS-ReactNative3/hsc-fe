@@ -9,6 +9,7 @@ import React from 'react';
 import { Helmet } from 'react-helmet';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 // import { Redirect } from 'react-router';
 import { Grid } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
@@ -22,7 +23,6 @@ import Anagrafiche from '../Anagrafiche/Loadable';
 import Home from '../Home/Loadable';
 // import Auth from '../Auth/Loadable';
 import './css/style.css';
-
 
 const AppWrapper = styled.div`
   // max-width: calc(768px + 156px * 2);
@@ -102,10 +102,12 @@ class App extends React.Component {
     // const userName = localStorage.getItem('username');
     // const userRole = 'Admin';
     const listItem = [
-      { key: '/', active: true, name: 'Editorials', icon: 'american sign language interpreting' },
-      { key: 'home', name: 'Reviews', icon: 'home' },
-      { key: 'features', name: 'Upcoming Events', icon: 'code' },
+      { key: '/', active: true, name: 'Stock Market', icon: 'chart bar' },
+      { key: 'home', name: 'Events', icon: 'calendar alternate' },
+      { key: 'features', name: 'Upcoming Events', icon: 'chart line' },
     ];
+    const userName = 'Diec Tin Toan';
+    const userRole = 'Admin';
 
     return (
       <AppWrapper>
@@ -122,7 +124,7 @@ class App extends React.Component {
                 this.props.location.pathname !== '/login' ?
                   // <div style={{ width: 150, position: 'fixed', zIndex: '100', left: 0 }} className="left-block-content">
                   <div style={{ width: '100%', position: 'fixed', zIndex: '100', left: 0 }}>
-                    <CustomMenu listItem={listItem} location={this.props.location} history={history} />
+                    <CustomMenu listItem={listItem} userName={userName} userRole={userRole} location={this.props.location} history={history} />
                   </div> : null
               }
               <Grid.Column

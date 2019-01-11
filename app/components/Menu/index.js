@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Menu, Icon, Image } from 'semantic-ui-react';
+import { Menu, Icon, Image, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+
 // import { Route, browserHistory } from 'react-router';
 // import './css/styles.css';
 
@@ -47,42 +48,32 @@ class CustomMenu extends Component {
     this.setState({ activeItemMenu: name });
   };
 
+  logoutFunc() {
+    localStorage.clear();
+    window.location.href = '/login';
+  }
+
   render() {
     const tmpPathName = this.props.location.pathname.split('/')[1];
     let activeMenu = tmpPathName;
     if (activeMenu === null) {
       activeMenu = 'editorials';
     }
-
     const listMenu = [];
-    const classImpostazioni = 'menu-item-impostazioni';
+    const widthMenuItem = 65 / this.props.listItem.length;
     this.props.listItem.map((menuItem) => {
-      let itemInMenu = (
+      const itemInMenu = (
         <Menu.Item
           key={menuItem.key}
           name={menuItem.key}
           active={activeMenu === menuItem.key}
           onClick={this.handleItemClick}
-          style={{ width: '25%' }}
+          style={{ width: `${widthMenuItem}%` }}
         >
           <Icon name={menuItem.icon} />
           <p className="wrapper-menu-p">{menuItem.name}</p>
         </Menu.Item>
       );
-      if (menuItem.key === 'impostazioni') {
-        itemInMenu = (
-          <Menu.Item
-            className={classImpostazioni}
-            key={menuItem.key}
-            name={menuItem.key}
-            active={activeMenu === menuItem.key}
-            onClick={this.handleItemClick}
-          >
-            <Icon name={menuItem.icon} />
-            <p className="wrapper-menu-p">{menuItem.name}</p>
-          </Menu.Item>
-        );
-      }
       listMenu.push(itemInMenu);
       return true;
     });
@@ -94,9 +85,16 @@ class CustomMenu extends Component {
           onClick={this.handleDisplayMenu}
           style={{ margin: -1, marginBottom: 1, width: '25%' }}
         >
-          <Image alt={''} src="/logohsc.png" />
+          <Image alt={'Logo'} src="/logohsc.png" />
         </Menu.Item>
         {listMenu}
+        <Dropdown text={`${this.props.userName}\nDCG Teamjoy`} pointing className="link item" style={{ width: '10%' }}>
+          <Dropdown.Menu>
+            <Dropdown.Header><Image alt={'teamjoy'} src="/DCG_Teamjoy.jpg" />{this.props.userRole}</Dropdown.Header>
+            <Dropdown.Divider />
+            <Dropdown.Item>Log out</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
       </Menu>
       // </div>
     );
@@ -115,5 +113,7 @@ CustomMenu.propTypes = {
   history: PropTypes.object,
   location: PropTypes.object,
   listItem: PropTypes.array,
+  userName: PropTypes.string,
+  userRole: PropTypes.string,
 };
 export default CustomMenu;
