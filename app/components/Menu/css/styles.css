@@ -20,6 +20,7 @@
 }
 
 .wrapper-menu .menu {
+  z-index: 3;
   border-bottom: 0px solid!important;
 }
 
