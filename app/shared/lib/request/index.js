@@ -23,10 +23,6 @@ const client = axios.create({
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     'Content-Type': 'application/json',
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Access-Control-Max-Age': 1728000,
   },
 });
 

@@ -38,6 +38,10 @@ class Events extends React.Component {
   }
 
   componentWillMount() {
+    this.loadingDataTable();
+  }
+
+  loadingDataTable = () => {
     HomeService.getList({}).then((res) => {
       const listItems = _.get(res, 'results', []);
       this.setState({
@@ -49,11 +53,12 @@ class Events extends React.Component {
   }
 
   formatDataTable = (listEvents) => {
+    console.log(listEvents);
     const results = [];
     if (listEvents && listEvents.length > 0) {
       listEvents.forEach((item, idx) => {
         const gridItem = {
-          key: idx,
+          key: `${item.pk}-${idx}`,
           id: item.pk,
           name: item.name,
           host: item.host,

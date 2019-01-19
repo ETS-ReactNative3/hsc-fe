@@ -1,0 +1,70 @@
+.container-login button,
+.container-login label,
+.container-login input
+{
+  /*font-family: var(--font-family);*/
+}
+
+.container-login .main-form .field,
+.container-login .second-form .field,
+.container-login button
+{
+  width: 100%;
+}
+
+#app div:first-child .body-content-login .container-login{
+  width: 50%;
+  margin: auto;
+  padding-top: 20vh!important;
+}
+#app div:first-child .body-content-login .container-login .main-form{
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 0px 60px 20px 60px!important;
+}
+#app div:first-child .body-content-login .container-login .second-form{
+  border: 1px solid grey;
+  border-radius: 10px;
+  padding: 20px 60px 20px 60px;
+  margin-top: 20px;
+  transition: opacity 0.5s, margin 0.5s;
+  -moz-transition: opacity 0.5s, margin 0.5s;
+  -o-transition: opacity 0.5s, margin 0.5s;
+  -webkit-transition: opacity 0.5s, margin 0.5s;
+}
+.main-form .btn-action button{
+  height: 40px;
+}
+.main-form .btn-action.login{
+  margin-top: 40px;
+}
+.main-form .logo{
+  text-align: center;
+}
+.main-form .btn-action.forget-password,
+.second-form .btn-action.forget-password{
+  margin-top: 15px;
+}
+.hidden{
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s, margin 0.5s;
+  -moz-transition: opacity 0.5s, margin 0.5s;
+  -o-transition: opacity 0.5s, margin 0.5s;
+  -webkit-transition: opacity 0.5s, margin 0.5s;
+}
+@media only screen and (min-width: 550px) and (max-width: 768px){
+  #app div:first-child .body-content-login .container-login{
+    width: 70%;
+  }
+}
+@media only screen and (min-width: 769px){
+  #app div:first-child .body-content-login .container-login{
+    width: 40%;
+  }
+}
+@media only screen and (max-width: 549px){
+  #app div:first-child .body-content-login .container-login{
+    width: 90%;
+  }
+}
