@@ -26,9 +26,23 @@ export class CustomGrid extends React.Component {
     gridData.forEach((item, idx) => {
       const columnGrid = (
         <Grid.Column key={item.key ? item.key : idx} className="grid-event-column" width={5}>
-          <Image height="220px" src={item.imgUrl} />
-          <h5>{item.name}</h5>
-          <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" />
+          <div className="event-card-image border-tlr-radius">
+            <Image src={item.imgUrl} />
+          </div>
+          <div className="event-card-content card-padding">
+            <div className="event-card-meta">
+              <span>By <a href="https://www.google.com/">Host name</a></span>
+              <time>17 March</time>
+            </div>
+            <article className="event-card-article">
+              <h2>{item.name}</h2>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
+              </p>
+              {/* <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" /> */}
+            </article>
+          </div>
           {/* <Image src="https://react.semantic-ui.com/images/wireframe/image.png" /> */}
           <div className="hover-view-event">
             <Button className="btn-action-view" content="View" onClick={() => this.props.clickToOpen(item)} />

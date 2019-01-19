@@ -1,14 +1,12 @@
 /* format css for event grid */
 .five.wide.column.grid-event-column {
+    padding: 0;
     box-shadow: 0 0 0 1px #d4d4d5;
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
     margin: 5px auto;
+    height: 350px;
 }
 /* Fake column*/
 .five.wide.column.last-column-event {
-    padding-top: 10px !important;
-    padding-bottom: 10px !important;
     margin: 5px auto;
 }
 
@@ -54,4 +52,72 @@ button.ui.button.btn-action-view {
 
 .hover-view-event:hover button.ui.button.btn-action-view{
     opacity: 1;
+}
+
+
+.event-card-image{
+
+}
+
+.event-card-content{
+
+}
+
+.event-card-meta{
+    padding: 0.83em 0;
+}
+.event-card-meta span{
+}
+
+.event-card-meta time{
+    color: #bbb;
+    margin-left:0.8rem;
+}
+
+.card-padding{
+    padding: 1.6rem;
+}
+.border-tlr-radius{
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.event-card-title{
+    color: #262626;
+}
+
+.event-card-meta{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.event-card-article{
+    margin: 0;
+    padding: 0;
+    padding-bottom: 16px;
+    box-sizing: border-box;
+    height: 200px;
+}
+
+.event-card-article > h2,
+.event-card-article > p{
+    padding:0;
+}
+
+.event-card-article > h2{
+    white-space: nowrap; /* don't break the line */
+    overflow: hidden; /* make sure it hides the content that overflows */
+    text-overflow: ellipsis; /* give the beautiful '...' effect */
+    line-height: 1.2;
+    margin-bottom: 1.6rem;
+}
+
+.event-card-article > p{
+    display:block;
+    color: #666;
+    word-break: break-all;
+    white-space: normal; /* don't break the line */
+    overflow-y: hidden; /* make sure it hides the content that overflows */
+    text-overflow: ellipsis; /* give the beautiful '...' effect */
 }
