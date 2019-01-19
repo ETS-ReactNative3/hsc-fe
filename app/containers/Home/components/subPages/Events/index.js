@@ -1,5 +1,6 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
+import _ from 'lodash';
 import { Grid } from 'semantic-ui-react';
 import { Carousel } from 'react-responsive-carousel';
 import { CustomGrid } from 'components/CustomGrid';
@@ -14,6 +15,7 @@ import banner8 from 'images/Banner8.jpg';
 import banner9 from 'images/Banner9.png';
 // import CustomGrid from '../../../components/CustomGrid';
 import CustomModal from './Modal/index';
+import HomeService from '../../../../../shared/services/api/home/index';
 
 class Events extends React.Component {
   constructor(props) {
@@ -24,14 +26,45 @@ class Events extends React.Component {
       activeName: 'Viet Ngu',
       isReloadList: false,
       listItemDemo: [
-        { key: 1, id: 1, name: 'one', imgUrl: banner1 },
-        { key: 2, id: 2, name: 'two', imgUrl: banner6 },
-        { key: 3, id: 3, name: 'three', imgUrl: banner5 },
-        { key: 4, id: 4, name: 'four', imgUrl: banner7 },
-        { key: 5, id: 5, name: 'five', imgUrl: banner2 },
+        { key: 1, id: 1, name: '✅ NHẬN ĐỊNH THỊ TRƯỜNG CƠ SỞ TUẦN 14/01 - 18/01/2019', imgUrl: banner1, description: 'Một tuần biến động theo biên độ hẹp và giao dịch khá giằng co của thị trường, chỉ số Vnindex đang tiếp cận vùng kháng cự quanh khu vực 910 - 920 điểm nên lực mua lên cũng dè chừng và thận trọng hơn, các cổ phiếu tiếp tục phân hóa. Theo dõi livestream để nhìn nhận tình trạng dòng tiền cho chiến lược thời gian tới. 📢 20:00 - Livestream nhận định thị trường chứng khoán cơ sở tuần qua và chiến lược giao dịch cho tuần mới. Qúy nhà đầu tư để lại thắc mắc về cổ phiếu bên dưới phần cmt ạ. 🔔 A/c vui lòng like và share post này để xem được livestream nhé' },
+        { key: 2, id: 2, name: 'Nhận định thị trường phái sinh ngày 10.01.2019', imgUrl: banner6 },
+        { key: 3, id: 3, name: 'BẢN TIN HỢP ĐỒNG TƯƠNG LAI 9/1', imgUrl: banner5 },
+        { key: 4, id: 4, name: '💼 LÀM SAO ĐỂ KIẾM TIỀN TỪ PHÁI SINH 💼', imgUrl: banner7, description: '💱 PHÁI SINH: kênh đầu tư hiệu quả cao với số vốn đầu tư nhỏ. 💱 Chi phí giao dịch cực thấp so với các loại hình chứng khoán khác. LỢI NHUẬN LỚN NHƯNG CŨNG TIỀM ẨN NHIỀU RỦI RO! Vì vậy, HSC DCG TEAMJOY tổ chức buổi hội thảo LÀM SAO ĐỂ KIẾM TIỀN TỪ PHÁI SINH 📊 Để giúp bạn hiểu rõ hơn về Chứng khoán Phái sinh. 📊 Biết cách mở tài khoản, giao dịch online. 📊 Nắm được chìa khóa giao dịch thành công. ===================================. Thời gian: 20h, 10/01/2018. Địa điểm: Hội thảo online (Vé tham dự sẽ được gửi qua email)' },
+        { key: 5, id: 5, name: ' NHẬN ĐỊNH TT CHỨNG KHOÁN PHÁI SINH NGÀY 07/01/2019', imgUrl: banner2 },
       ],
+      listItems: [],
       openModal: false,
     };
+  }
+
+  componentWillMount() {
+    HomeService.getList({}).then((res) => {
+      const listItems = _.get(res, 'results', []);
+      this.setState({
+        listItems: this.formatDataTable(listItems),
+      });
+    }).catch((error) => {
+      console.log(error);
+    });
+  }
+
+  formatDataTable = (listEvents) => {
+    const results = [];
+    if (listEvents && listEvents.length > 0) {
+      listEvents.forEach((item, idx) => {
+        const gridItem = {
+          key: idx,
+          id: item.pk,
+          name: item.name,
+          host: item.host,
+          description: item.description,
+          date: item.date,
+          imgUrl: banner7,
+        };
+        results.push(gridItem);
+      });
+    }
+    return results;
   }
 
   handleTabChange = (e, { activeIndex }) => {
@@ -67,7 +100,7 @@ class Events extends React.Component {
   }
 
   render() {
-    const { openModal, eventItem } = this.state;
+    const { openModal, eventItem, listItems } = this.state;
     return (
       <div>
         <Grid className="header-list">
@@ -95,7 +128,7 @@ class Events extends React.Component {
             {/* <p className="legend">Legend 3</p> */}
           </div>
         </Carousel>
-        <CustomGrid listItem={this.state.listItemDemo} clickToOpen={this.handleOpenModal} />
+        <CustomGrid listItem={listItems} clickToOpen={this.handleOpenModal} />
         {openModal ? <CustomModal
           ref={(el) => { this.form = el; }}
           handleOpenModal={this.handleOpenModal}

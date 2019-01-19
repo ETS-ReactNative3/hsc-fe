@@ -11,3 +11,7 @@
 .popup-container .content .popup-icon{
   margin-top: -10px;
 }
+i.setting.large.circular.icon.tbl-action-icon{
+  background: #3078C5;
+  color: white;
+}

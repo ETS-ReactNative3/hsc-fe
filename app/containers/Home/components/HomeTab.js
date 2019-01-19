@@ -3,7 +3,8 @@ import React from 'react';
 import { Grid, Tab } from 'semantic-ui-react';
 import './css/styles.css';
 import Events from './subPages/Events/index';
-import ComingEvent from './subPages/ComingEvents/index';
+import Services from './subPages/Services/index';
+import Posts from './subPages/Posts/index';
 // import CustomGrid from '../../../components/CustomGrid';
 class HomeTab extends React.Component {
   constructor(props) {
@@ -54,10 +55,18 @@ class HomeTab extends React.Component {
         ),
       },
       {
-        menuItem: 'Upcoming events',
+        menuItem: 'Services',
         render: () => (
           <Tab.Pane>
-            <ComingEvent />
+            <Services />
+          </Tab.Pane>
+        ),
+      },
+      {
+        menuItem: 'Posts',
+        render: () => (
+          <Tab.Pane>
+            <Posts />
           </Tab.Pane>
         ),
       },

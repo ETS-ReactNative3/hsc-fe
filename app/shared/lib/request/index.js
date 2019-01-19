@@ -21,8 +21,11 @@ const client = axios.create({
   baseURL: API.BASEURL,
   crossdomain: true,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE',
+    'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': 1728000,
   },
 });
@@ -31,7 +34,7 @@ const uploadFile = axios.create({
   baseURL: API.BASEURL,
   crossdomain: true,
   headers: {
-    Authorization: `Bearer ${localStorage.getItem('authToken')}`,
+    // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     'Content-Type': 'application/x-www-form-urlencoded',
     'Access-Control-Max-Age': 1728000,
   },
@@ -51,7 +54,7 @@ const request = (options) => {
         // console.error('Unauthorized');
         // store.dispatch(revokeAuthAction());
         localStorage.clear();
-        window.location.href = '/login';
+        // window.location.href = '/login';
       } else {
         // Request was made but server responded with something
         // other than 2xx

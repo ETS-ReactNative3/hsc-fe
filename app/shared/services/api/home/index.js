@@ -3,7 +3,7 @@ import { API } from '../../../constants';
 
 const create = (content) => {
   let url = '';
-  url = API.TEST;
+  url = API.EVENTS;
   return request(
     {
       url,
@@ -13,7 +13,7 @@ const create = (content) => {
 };
 
 const getList = (data) => {
-  let url = API.TEST;
+  let url = API.EVENTS;
   let sort = '';
   let direction = '';
   let searchText = '';
@@ -43,25 +43,25 @@ const getList = (data) => {
 
 const getById = (id) => request(
   {
-    url: `${API.TEST}/${id}`,
+    url: `${API.EVENTS}/${id}`,
     method: 'GET',
   });
 
 const deleteById = (id) =>
   request(
     {
-      url: `${API.TEST}/${id}`,
+      url: `${API.EVENTS}/${id}`,
       method: 'DELETE',
     });
 
 const update = (id, content) => request(
   {
-    url: `${API.TEST}/${id}`,
+    url: `${API.EVENTS}/${id}`,
     method: 'PUT',
     data: content,
   });
 
-const OfferService = {
+const HomeService = {
   create,
   getById,
   update,
@@ -69,4 +69,4 @@ const OfferService = {
   getList,
 };
 
-export default OfferService;
+export default HomeService;

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { Form, Input, Grid } from 'semantic-ui-react';
+import { Form, Input, Grid, Icon } from 'semantic-ui-react';
 import ErrorMessage from '../ErrorMessage';
 import Required from '../Required';
 import './css/styles.css';
@@ -25,16 +25,16 @@ export class CustomUpload extends React.Component {
         <CustomeGrid>
           <Grid.Row columns={2}>
             <Grid.Column
-              computer={6}
-              tablet={6}
-              largeScreen={6}
+              computer={16}
+              tablet={16}
+              largeScreen={16}
               mobile={16}
               className="input-file input-file-header"
               onClick={() => { document.getElementById(this.props.name).click(); }}
             >
-              <h4>UPLOAD</h4>
+              <h4><Icon color="white" name="upload" />UPLOAD</h4>
             </Grid.Column>
-            <Grid.Column
+            {/* <Grid.Column
               computer={10}
               tablet={10}
               largeScreen={10}
@@ -42,7 +42,7 @@ export class CustomUpload extends React.Component {
               className="input-file"
             >
               <span>{this.props.fileName}</span>
-            </Grid.Column>
+            </Grid.Column> */}
           </Grid.Row>
         </CustomeGrid>
         <Input
@@ -73,9 +73,7 @@ CustomUpload.propTypes = {
   required: PropTypes.bool,
   touched: PropTypes.object,
   placeholder: PropTypes.string,
-  fileName: PropTypes.string,
-  // className: PropTypes.string,
-  // defaultValue: PropTypes.string,
+  // fileName: PropTypes.string,
 };
 
 export default CustomUpload;

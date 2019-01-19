@@ -42,13 +42,13 @@ export class EditorPopup extends React.Component {
             {hasEdit ?
               <Grid.Column width={16} onClick={actionEdit}>
                 <Icon name="edit" size="large" className="popup-icon" />
-                <span>Modifica</span>
+                <span>Modify</span>
               </Grid.Column>
               : null}
             {hasView ?
               <Grid.Column width={16} onClick={actionView}>
                 <Icon name="eye" size="large" className="popup-icon" />
-                <span>Visualizza</span>
+                <span>View</span>
               </Grid.Column>
               : null}
             {hasCustom ?
@@ -57,7 +57,7 @@ export class EditorPopup extends React.Component {
             {hasRemove ?
               <Grid.Column width={16} onClick={actionRemove}>
                 <Icon name="remove" size="large" className="popup-icon" />
-                <span>Elimina</span>
+                <span>Remove</span>
               </Grid.Column>
               : null}
           </Grid>

@@ -13,7 +13,7 @@ let OBJ_FRONTEND;
 let OBJ_BACKEND;
 
 if (process.env.NODE_ENV === 'production') {
-  const url = '';
+  const url = 'http://localhost:8000';
   OBJ_FRONTEND = {
     URL: url,
     CLIENT_ID: 'admin',
@@ -29,7 +29,7 @@ if (process.env.NODE_ENV === 'production') {
     CLIENT_SECRET: '123456',
   };
   OBJ_BACKEND = {
-    URL: '',
+    URL: 'http://localhost:8000',
   };
 }
 const FRONTEND_CONFIG = OBJ_FRONTEND;

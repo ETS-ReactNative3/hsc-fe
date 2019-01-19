@@ -9,7 +9,7 @@ if (process.env.NODE_ENV === 'development' || process.env.DEPLOY_TO === 'test') 
 /** API ENDPOINTS */
 export const API = {
   BASEURL: baseUrl,
-  TEST: '/test',
+  EVENTS: '/events/',
   // CLIENTI: '/customer',
 };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { Button, Modal, Image } from 'semantic-ui-react';
+import { Button, Modal } from 'semantic-ui-react';
 // import _ from 'lodash';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
 
@@ -81,8 +81,15 @@ class CustomModal extends React.Component {
   };
 
   formatDataRequest = (data) => {
-    const formatedData = {};
-    console.log(data);
+    let formatedData = {};
+    if (data) {
+      formatedData = {
+        name: data.name,
+        description: data.description,
+        date: data.eventDate,
+        host: data.eventHost,
+      };
+    }
     return formatedData;
   };
 
@@ -122,11 +129,11 @@ class CustomModal extends React.Component {
 
   render() {
     const { openModal, msgAlert } = this.state;
-    const { eventItem } = this.props;
-    const name = eventItem.name;
-    const subHeader = 'Events';
-    const arrDes = this.splitDescription(eventItem.description);
-    console.log(arrDes);
+    // const { eventItem } = this.props;
+    const name = 'Add new Event';
+    // const subHeader = 'Events';
+    // const arrDes = this.splitDescription(eventItem.description);
+    // console.log(arrDes);
     // if (typeForm === 'add') {
     //   name = 'Add event';
     // } else if (typeForm === 'edit') {
@@ -139,22 +146,11 @@ class CustomModal extends React.Component {
         <Modal dimmer="blurring" open={openModal} closeOnDimmerClick={false} onClose={this.handleCloseModal} closeIcon>
           <Modal.Header>
             <label htmlFor>{name}</label>
-            <h5 className="sub-header">{subHeader}</h5>
+            {/* <h5 className="sub-header">{subHeader}</h5> */}
           </Modal.Header>
-
-          <Modal.Content image scrolling>
-            <Image size="big" style={{ margin: '0 auto' }} src={eventItem.imgUrl} wrapped />
-            {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
-            <Modal.Description>
-              {/* <Header>{eventItem.name}</Header> */}
-              <div className="event-description">
-                {/* {eventItem.description} */}
-                {arrDes}
-              </div>
-            </Modal.Description>
-          </Modal.Content>
           <Modal.Content>
-            <h3>Đăng ký review danh mục và tham gia hệ thống KH Teamjoy</h3>
+            {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
             <Formik
               ref={(c) => { this.baseForm = c; }}
               onSubmit={this.onBaseSubmit}
@@ -183,7 +179,7 @@ class CustomModal extends React.Component {
               icon="check"
               labelPosition="right"
               floated="right"
-              content="Register"
+              content="Create"
               onClick={this.onSubmit}
             />
           </Modal.Actions>
@@ -198,7 +194,7 @@ CustomModal.propTypes = {
   openModal: PropTypes.bool,
   // typeForm: PropTypes.string,
   closeModal: PropTypes.func,
-  eventItem: PropTypes.object,
+  // eventItem: PropTypes.object,
   // selectedId: PropTypes.string,
   // handleReturnMessage: PropTypes.func,
   // data: PropTypes.object,

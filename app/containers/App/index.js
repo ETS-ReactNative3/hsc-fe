@@ -118,7 +118,7 @@ class App extends React.Component {
           <meta name="description" content="HSC Application" />
         </Helmet>
         <div className={!isLoginPage ? 'body-content' : 'body-content-login'}>
-          <Grid>
+          <Grid style={{ background: '#e9ebee' }}>
             <Grid.Row width={16}>
               {
                 this.props.location.pathname !== '/login' ?
