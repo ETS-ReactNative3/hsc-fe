@@ -104,7 +104,7 @@ export class DatePicker extends React.Component {
                 <Cleave
                   name={name}
                   disabled={disabled}
-                  placeholder={this.props.placeholder ? this.props.placeholder : 'GG/MM/AAAA'}
+                  placeholder={this.props.placeholder ? this.props.placeholder : 'DD/MM/YYYY'}
                   onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
                   onInit={this.onValueInit}
                   options={{
@@ -142,7 +142,7 @@ export class DatePicker extends React.Component {
               onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
               disabled={disabled}
               placeholder={
-                  this.props.placeholder ? this.props.placeholder : 'GG/MM/AAAA'
+                this.props.placeholder ? this.props.placeholder : 'DD/MM/YYYY'
               }
               onInit={this.onValueInit}
               options={{

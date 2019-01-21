@@ -20,7 +20,7 @@ class FlashMessage extends Component {
       (<Message
         className={className}
         icon={<Icon size="big" name={icon} style={{ marginTop: '-9px' }} />}
-        header={info.isSuccess ? 'Successo' : 'Fallimento'}
+        header={info.isSuccess ? 'Success' : 'Something error'}
         content={info.content}
       />);
     return msgModal;

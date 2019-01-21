@@ -31,8 +31,9 @@ const uploadFile = axios.create({
   crossdomain: true,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-    'Content-Type': 'application/x-www-form-urlencoded',
-    'Access-Control-Max-Age': 1728000,
+    'Content-Type': 'multipart/form-data',
+    // 'Access-Control-Max-Age': 1728000,
+    // 'Access-Control-Allow-Origin': '*',
   },
 });
 
@@ -40,11 +41,12 @@ const uploadFile = axios.create({
  * Request Wrapper with default success/error actions
  */
 const request = (options) => {
+  console.log(options);
   const onSuccess = (response) => options.raw ? response : response.data;
   // console.debug('Request Successful!', response);
   // If options.raw is true, return all response
   const onError = (error) => {
-    // console.error('Request Failed:', error.config);
+    console.error('Request Failed:', error.config);
     if (error.response) {
       if (error.response.status === 401) {
         // console.error('Unauthorized');

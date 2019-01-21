@@ -6,11 +6,15 @@ import { Button, Modal } from 'semantic-ui-react';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
 
 // import OfferteService from '../../../../../../shared/services/api/offerte';
-// import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
+import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
 import { mapToInitialValues } from './initialValues';
 import Validation from './validation';
 import BaseForm from './baseForm';
+import BaseFormView from './baseFormView';
 // import BaseFormView from './baseFormView';
+import { formatDateRequest } from '../../../../../../shared/lib/common';
+
+import HomeService from '../../../../../../shared/services/api/home/index';
 
 let showFlashMessage = false;
 class CustomModal extends React.Component {
@@ -20,6 +24,7 @@ class CustomModal extends React.Component {
     this.state = {
       openModal: false,
       msgAlert: {},
+      fileUpload: null,
     };
   }
 
@@ -48,9 +53,10 @@ class CustomModal extends React.Component {
   };
 
   onError = (msg) => {
+    const msgAlert = handleErrorMessage(msg);
     this.setState({
-      msgAlert: msg,
-    }, this.handleShowFlashMessage());
+      msgAlert,
+    }, () => this.handleShowFlashMessage());
   };
 
   onSwitchTab = (isGenerali) => {
@@ -60,9 +66,25 @@ class CustomModal extends React.Component {
   };
 
   handleCallService = (data, actions) => {
-    // ToDo
-    console.log(data);
-    console.log(actions);
+    if (this.props.typeForm === 'add') {
+      HomeService.create(data).then((res) => {
+        // if (this.state.fileUpload !== null) {
+        //   this.handleUploadFile(res.pk, actions);
+        // } else {
+        //   actions.setSubmitting(false);
+        //   this.handleCloseModal(res);
+        // }
+        actions.setSubmitting(false);
+        console.log(res);
+      }).catch((errors) => {
+        this.onError(errors);
+        actions.setSubmitting(false);
+      });
+    } else {
+      // HomeService.update(this.props.eventItem.pk, data).then((res) => {
+
+      // }).catch
+    }
   };
 
   formatTypeRequest = (arrStr) => {
@@ -82,14 +104,20 @@ class CustomModal extends React.Component {
 
   formatDataRequest = (data) => {
     let formatedData = {};
+    const date = data.eventDate ? `${formatDateRequest(data.eventDate)}T10:10:05Z` : '';
     if (data) {
       formatedData = {
         name: data.name,
         description: data.description,
-        date: data.eventDate,
+        short_description: data.shortDescription,
+        date,
         host: data.eventHost,
+        image: data.imageEvent ? data.imageEvent : null,
       };
     }
+    this.setState({
+      fileUpload: data.imageEvent,
+    });
     return formatedData;
   };
 
@@ -127,20 +155,36 @@ class CustomModal extends React.Component {
     return null;
   }
 
+  handleUploadFile = (id, actions) => {
+    console.log(id);
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('fileUpload', this.state.imageEvent);
+
+    HomeService.uploadFile(formData, id).then((res) => {
+      console.log(res);
+      actions.setSubmitting(false);
+      this.handleCloseModal();
+    }).catch((errors) => {
+      this.onError(errors);
+      actions.setSubmitting(false);
+    });
+  };
+
   render() {
     const { openModal, msgAlert } = this.state;
-    // const { eventItem } = this.props;
-    const name = 'Add new Event';
+    const { eventItem, typeForm } = this.props;
+    let name = 'Add new Event';
     // const subHeader = 'Events';
     // const arrDes = this.splitDescription(eventItem.description);
     // console.log(arrDes);
-    // if (typeForm === 'add') {
-    //   name = 'Add event';
-    // } else if (typeForm === 'edit') {
-    //   name = 'Edit event';
-    // } else {
-    //   name = 'Event detail';
-    // }
+    if (typeForm === 'add') {
+      name = 'Add new event';
+    } else if (typeForm === 'edit') {
+      name = `Edit ${eventItem.name}`;
+    } else {
+      name = `${eventItem.name} detail`;
+    }
     return (
       <div>
         <Modal dimmer="blurring" open={openModal} closeOnDimmerClick={false} onClose={this.handleCloseModal} closeIcon>
@@ -160,7 +204,8 @@ class CustomModal extends React.Component {
                   ? mapToInitialValues(this.props.initialValues)
                   : mapToInitialValues({})
               }
-              render={(props) => <BaseForm {...props} onError={this.onError} />
+              render={(props) =>
+                this.props.typeForm !== 'view' ? <BaseForm {...props} onError={this.onError} eventItem={eventItem} typeForm={typeForm} /> : <BaseFormView {...props} onError={this.onError} eventItem={eventItem} typeForm={typeForm} />
               }
             />
           </Modal.Content>
@@ -173,15 +218,15 @@ class CustomModal extends React.Component {
               onClick={this.handleCloseModal}
               content="Cancel"
             />
-            <Button
+            {typeForm !== 'view' ? <Button
               className="register-event-action-btn"
               primary
-              icon="check"
+              icon={typeForm === 'add' ? 'plus' : 'cogs'}
               labelPosition="right"
               floated="right"
-              content="Create"
+              content={typeForm === 'add' ? 'Create' : 'Edit'}
               onClick={this.onSubmit}
-            />
+            /> : null}
           </Modal.Actions>
         </Modal>
       </div>
@@ -192,9 +237,9 @@ class CustomModal extends React.Component {
 CustomModal.propTypes = {
   initialValues: PropTypes.object,
   openModal: PropTypes.bool,
-  // typeForm: PropTypes.string,
+  typeForm: PropTypes.string,
   closeModal: PropTypes.func,
-  // eventItem: PropTypes.object,
+  eventItem: PropTypes.object,
   // selectedId: PropTypes.string,
   // handleReturnMessage: PropTypes.func,
   // data: PropTypes.object,

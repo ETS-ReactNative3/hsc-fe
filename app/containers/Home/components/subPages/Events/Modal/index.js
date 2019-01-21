@@ -6,11 +6,11 @@ import { Button, Modal, Image } from 'semantic-ui-react';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
 
 // import OfferteService from '../../../../../../shared/services/api/offerte';
-// import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
+import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
 import { mapToInitialValues } from './initialValues';
 import Validation from './validation';
 import BaseForm from './baseForm';
-// import BaseFormView from './baseFormView';
+import HomeService from '../../../../../../shared/services/api/home/index';
 
 let showFlashMessage = false;
 class CustomModal extends React.Component {
@@ -27,7 +27,7 @@ class CustomModal extends React.Component {
     this.setState({
       openModal: this.props.openModal,
     });
-
+    console.log(this.props.eventItem);
     showFlashMessage = false;
   }
 
@@ -61,8 +61,18 @@ class CustomModal extends React.Component {
 
   handleCallService = (data, actions) => {
     // ToDo
-    console.log(data);
-    console.log(actions);
+    HomeService.addNewSubcriber(this.props.eventItem.id, data).then((res) => {
+      // this.props.handleReturnMessage('Offerte', 'add');
+      actions.setSubmitting(false);
+      this.handleCloseModal(res);
+    }).catch((errors) => {
+      const msg = handleErrorMessage(errors);
+      this.setState({
+        msgAlert: msg,
+      }, this.handleShowFlashMessage());
+
+      actions.setSubmitting(false);
+    });
   };
 
   formatTypeRequest = (arrStr) => {
@@ -81,8 +91,18 @@ class CustomModal extends React.Component {
   };
 
   formatDataRequest = (data) => {
-    const formatedData = {};
-    console.log(data);
+    let formatedData = {};
+    if (data) {
+      formatedData = {
+        first_name: data.firstName ? data.firstName : '',
+        last_name: data.lastName ? data.lastName : '',
+        email: data.email ? data.email : '',
+        phone: data.phoneNumber ? `+84${data.phoneNumber}` : '',
+        gender: data.subGender ? data.subGender : 'O',
+        status: data.status ? data.status : 'P',
+        address: data.address ? data.address : 'DEFAULT',
+      };
+    }
     return formatedData;
   };
 

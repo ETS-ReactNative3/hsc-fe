@@ -13,9 +13,15 @@ import banner6 from 'images/Banner6.png';
 import banner7 from 'images/Banner7.jpg';
 import banner8 from 'images/Banner8.jpg';
 import banner9 from 'images/Banner9.png';
+import FlashMessage from 'components/Forms/UI/FlashMessage';
+
 // import CustomGrid from '../../../components/CustomGrid';
+import { handleErrorMessage } from '../../../../../shared/lib/msgFormatter';
+
 import CustomModal from './Modal/index';
 import HomeService from '../../../../../shared/services/api/home/index';
+
+let showFlashMessage = false;
 
 class Events extends React.Component {
   constructor(props) {
@@ -38,8 +44,16 @@ class Events extends React.Component {
   }
 
   componentWillMount() {
+    showFlashMessage = false;
     this.loadingDataTable();
   }
+
+  onError = (msg) => {
+    const msgAlert = handleErrorMessage(msg);
+    this.setState({
+      msgAlert,
+    }, () => this.handleShowFlashMessage());
+  };
 
   loadingDataTable = () => {
     HomeService.getList({}).then((res) => {
@@ -47,24 +61,26 @@ class Events extends React.Component {
       this.setState({
         listItems: this.formatDataTable(listItems),
       });
-    }).catch((error) => {
-      console.log(error);
+    }).catch((errors) => {
+      this.onError(errors);
+      actions.setSubmitting(false);
     });
   }
 
   formatDataTable = (listEvents) => {
-    console.log(listEvents);
     const results = [];
     if (listEvents && listEvents.length > 0) {
       listEvents.forEach((item, idx) => {
+        console.log(item);
         const gridItem = {
           key: `${item.pk}-${idx}`,
           id: item.pk,
           name: item.name,
           host: item.host,
           description: item.description,
+          shortDescription: item.short_description,
           date: item.date,
-          imgUrl: banner7,
+          imgUrl: item.image,
         };
         results.push(gridItem);
       });
@@ -104,10 +120,20 @@ class Events extends React.Component {
     });
   }
 
+  handleShowFlashMessage = () => {
+    showFlashMessage = true;
+    setTimeout(() => {
+      showFlashMessage = false;
+      this.forceUpdate();
+    }, 6000);
+  };
+
   render() {
     const { openModal, eventItem, listItems } = this.state;
     return (
       <div>
+        {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
         <Grid className="header-list">
           <Grid.Row>
             {/* <Grid.Column computer={2} tablet={2} largeScreen={1} mobile={2}>

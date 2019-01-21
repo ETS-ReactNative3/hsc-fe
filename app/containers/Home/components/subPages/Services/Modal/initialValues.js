@@ -2,7 +2,9 @@ export const mapToInitialValues = () => {
   const mappedValues = {
     name: '',
     description: '',
-    eventDate: null,
+    eventDate: '',
+    eventImage: '',
+    shortDescription: '',
   };
   return mappedValues;
 };

@@ -2,13 +2,15 @@ import request from '../../../lib/request';
 import { API } from '../../../constants';
 
 const create = (content) => {
-  let url = '';
-  url = API.EVENTS;
+  const url = API.EVENTS;
   return request(
     {
       url,
       method: 'POST',
-      data: content,
+      event: content,
+      data: { event: JSON.stringify(content) },
+      type: 'uploadFile',
+
     });
 };
 
@@ -43,22 +45,49 @@ const getList = (data) => {
 
 const getById = (id) => request(
   {
-    url: `${API.EVENTS}/${id}`,
+    url: `${API.EVENTS}${id}/`,
     method: 'GET',
   });
 
 const deleteById = (id) =>
   request(
     {
-      url: `${API.EVENTS}/${id}`,
+      url: `${API.EVENTS}${id}`,
       method: 'DELETE',
     });
 
 const update = (id, content) => request(
   {
-    url: `${API.EVENTS}/${id}`,
-    method: 'PUT',
+    url: `${API.EVENTS}${id}/`,
+    method: 'PATCH',
     data: content,
+  });
+
+const addNewSubcriber = (eventId, subcriber) => {
+  const url = `${API.EVENTS}${eventId}/subscribers/`;
+  return request(
+    {
+      url,
+      method: 'POST',
+      data: subcriber,
+    });
+};
+
+const getListSubcribers = (eventId) => {
+  const url = `${API.EVENTS}${eventId}/subscribers/`;
+  return request(
+    {
+      url,
+      method: 'GET',
+    });
+};
+
+const uploadFile = (data, id) => request(
+  {
+    url: `${API.EVENTS}${id}/`,
+    method: 'PATCH',
+    data,
+    type: 'uploadFile',
   });
 
 const HomeService = {
@@ -67,6 +96,9 @@ const HomeService = {
   update,
   deleteById,
   getList,
+  addNewSubcriber,
+  getListSubcribers,
+  uploadFile,
 };
 
 export default HomeService;

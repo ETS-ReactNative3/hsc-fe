@@ -31,8 +31,9 @@ export const formatPlaceData = (place) => {
 // Format Date from DD/MM/YYYY HH:mm:ss to MM/DD/YYYY HH:mm:ss for creating a new Date
 export const formatDateTime = (strDate) => {
   if (strDate && strDate !== '') {
-    const arr = strDate.split('/');
-    return `${arr[1]}/${arr[0]}-${arr[2]}`;
+    const arr = strDate.split('T');
+    const arrDay = arr[0].split('-');
+    return `${arrDay[2]}-${arrDay[1]}-${arrDay[0]}`;
   }
   return null;
 };

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Grid, Image, Button } from 'semantic-ui-react';
+import moment from 'moment';
+import NoImage from 'images/noImage.svg.png';
 import './css/style.css';
 
 export class CustomGrid extends React.Component {
@@ -24,22 +26,24 @@ export class CustomGrid extends React.Component {
     const gridData = this.props.listItem;
     const arrData = [];
     gridData.forEach((item, idx) => {
+      const date = moment(item.date).format('d MMMM');
+      const image = item.imgUrl;
+      console.log(image);
+      const logo = image !== null ? image : NoImage;
+      const styleImage = image === null ? { maxHeight: '250px' } : { maxHeight: '270px' };
       const columnGrid = (
         <Grid.Column key={item.key ? item.key : idx} className="grid-event-column" width={5}>
           <div className="event-card-image border-tlr-radius">
-            <Image src={item.imgUrl} />
+            <Image style={styleImage} src={logo} />
           </div>
           <div className="event-card-content card-padding">
             <div className="event-card-meta">
-              <span>By <a href="https://www.google.com/">Host name</a></span>
-              <time>17 March</time>
+              <span>By <a href="https://www.google.com/">{item.host.name}</a></span>
+              <time>{date}</time>
             </div>
             <article className="event-card-article">
               <h2>{item.name}</h2>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ducimus harum...
-              </p>
+              <p>{item.shortDescription}</p>
               {/* <Image src="https://react.semantic-ui.com/images/wireframe/media-paragraph.png" /> */}
             </article>
           </div>

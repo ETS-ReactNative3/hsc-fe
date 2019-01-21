@@ -5,6 +5,7 @@ import { Grid, Table, Button, Icon } from 'semantic-ui-react';
 import EditorPopup from 'components/Forms/UI/Popup';
 
 import CustomModal from './Modal/index';
+import HomeService from '../../../../../shared/services/api/home/index';
 class Services extends React.Component {
   constructor(props) {
     super(props);
@@ -26,9 +27,21 @@ class Services extends React.Component {
   }
 
   componentWillMount() {
-    const eventsArray = this.formatedDataTable(this.state.tmpData);
-    this.setState({
-      eventsArray,
+    // const eventsArray = this.formatedDataTable(this.state.tmpData);
+    // this.setState({
+    //   eventsArray,
+    // });
+    this.loadingDataTable();
+  }
+
+  loadingDataTable = () => {
+    HomeService.getList({}).then((res) => {
+      const listItems = _.get(res, 'results', []);
+      this.setState({
+        eventsArray: this.formatedDataTable(listItems),
+      });
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -40,17 +53,18 @@ class Services extends React.Component {
     });
   };
 
-  handleOpenModal = (item) => {
+  handleOpenModal = (typeForm, item) => {
     this.setState({
       openModal: true,
       eventItem: item,
+      typeForm,
     });
   }
 
   handleCLoseModal = () => {
     this.setState({
       openModal: false,
-    });
+    }, () => this.loadingDataTable());
   }
 
 
@@ -67,17 +81,17 @@ class Services extends React.Component {
 
   formatedDataTable = (data) => {
     const tableRows = [];
-    if (data) {
+    if (data && data.length > 0) {
       data.forEach((item) => {
         const name = item.name;
-        const host = item.host;
+        const host = item.host.name;
         const date = item.date;
         const actions = (<EditorPopup
           hasEdit
           hasView
           hasRemove
-          actionEdit={() => console.log(`edit ${item.name}`)}
-          actionView={() => console.log(`edit ${item.name}`)}
+          actionEdit={() => this.handleOpenModal('edit', item)}
+          actionView={() => this.handleOpenModal('view', item)}
           actionRemove={() => console.log(`edit ${item.name}`)}
           position="bottom"
           triggerItem={<Icon name="setting" className="tbl-action-icon" circular size="large" />}
@@ -103,7 +117,7 @@ class Services extends React.Component {
   }
 
   render() {
-    const { openModal, eventsArray } = this.state;
+    const { openModal, eventsArray, eventItem, typeForm } = this.state;
     return (
       <div>
         <Grid className="header-list">
@@ -116,7 +130,7 @@ class Services extends React.Component {
             <Grid.Column computer={4} tablet={4} largeScreen={4} mobile={6}>
               <Button
                 color="blue"
-                onClick={this.handleOpenModal}
+                onClick={() => this.handleOpenModal('add')}
                 content="Add new event"
                 floated="right"
               />
@@ -142,6 +156,9 @@ class Services extends React.Component {
           handleOpenModal={this.handleOpenModal}
           closeModal={this.handleCLoseModal}
           openModal={openModal}
+          eventItem={eventItem}
+          typeForm={typeForm}
+          handleReloadList={this.loadingDataTable}
         /> : null}
         {/* <iframe title="facebook test" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FHSC.DCGTeamjoy%2Fvideos%2F536792843472616%2F&show_text=0&width=100" width="100%" height="800px" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowTransparency="true" allowFullScreen="true"></iframe> */}
       </div>

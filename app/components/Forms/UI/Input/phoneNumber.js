@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Required from '../Required';
 import ErrorMessage from '../ErrorMessage';
 
-export default class NumberInput extends React.Component {
+export default class PhoneNumberInput extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -79,11 +79,10 @@ export default class NumberInput extends React.Component {
           className={className}
           options={{
             numeral: true,
-            numeralDecimalMark: '.',
-            delimiter: '-',
+            numeralDecimalMark: ',',
+            delimiter: '.',
             rawValueTrimPrefix: false,
-            numeralIntegerScale: 9,
-            numeralDecimalScale: 0,
+            numeralDecimalScale: 2,
           }}
           onChange={(e) => {
             setFieldValue(name, e.target.rawValue);
@@ -103,7 +102,7 @@ export default class NumberInput extends React.Component {
   }
 }
 
-NumberInput.propTypes = {
+PhoneNumberInput.propTypes = {
   onChange: PropTypes.any,
   values: PropTypes.object,
   name: PropTypes.string,

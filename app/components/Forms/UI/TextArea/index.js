@@ -34,6 +34,8 @@ export class CustomTextArea extends React.Component {
         </label> }
         <TextArea
           onFocus={(e) => e.target.setAttribute('autocomplete', 'off')}
+          autoHeight
+          style={{ minHeight: 100 }}
           name={this.props.name}
           onChange={this.handleChange}
           value={this.state.value}
