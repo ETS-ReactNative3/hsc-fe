@@ -1,9 +1,9 @@
 /* format css for event grid */
 .five.wide.column.grid-event-column {
     padding: 0;
-    box-shadow: 0 0 0 1px #d4d4d5;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     margin: 5px auto;
-    height: 350px;
+    height: 400px;
 }
 /* Fake column*/
 .five.wide.column.last-column-event {
@@ -125,9 +125,12 @@ button.ui.button.btn-action-view {
 
 
 .event-card-image.border-tlr-radius {
-    max-height: 250px !important;
+    height: 250px !important;
 }
 
 .event-card-image.border-tlr-radius img.ui.image {
-    max-height: inherit;
+    border: 0;
+    box-sizing: border-box;
+    height: inherit;
+    width: 100%;
 }
