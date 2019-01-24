@@ -53,7 +53,7 @@ FullModal.propTypes = {
   className: PropTypes.string,
   onConfirm: PropTypes.func,
 
-  /* View Modal*/
+  /* View Modal */
   isNotConfirmAction: PropTypes.bool,
 };
 

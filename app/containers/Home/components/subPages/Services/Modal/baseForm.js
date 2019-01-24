@@ -23,6 +23,7 @@ import HostService from '../../../../../../shared/services/api/home/hosts';
 // import './../../../css/styles.css';
 import HomeService from '../../../../../../shared/services/api/home/index';
 
+
 const ColumnCod = styled(Grid.Column)`
   padding-right: 0px!important;
 `;
@@ -78,7 +79,8 @@ class BaseForm extends React.Component {
         optionsHost: this.formatedDataDropdown(listHost),
       });
     }).catch((errors) => {
-      console.log(errors);
+      this.onError(errors);
+      actions.setSubmitting(false);
     });
   }
 

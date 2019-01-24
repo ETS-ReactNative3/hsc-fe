@@ -27,7 +27,6 @@ class CustomModal extends React.Component {
     this.setState({
       openModal: this.props.openModal,
     });
-    console.log(this.props.eventItem);
     showFlashMessage = false;
   }
 
@@ -47,7 +46,9 @@ class CustomModal extends React.Component {
     this.handleCallService(data, actions);
   };
 
-  onError = (msg) => {
+  onError = (errors) => {
+    const msg = handleErrorMessage(errors);
+
     this.setState({
       msgAlert: msg,
     }, this.handleShowFlashMessage());
@@ -66,11 +67,7 @@ class CustomModal extends React.Component {
       actions.setSubmitting(false);
       this.handleCloseModal(res);
     }).catch((errors) => {
-      const msg = handleErrorMessage(errors);
-      this.setState({
-        msgAlert: msg,
-      }, this.handleShowFlashMessage());
-
+      this.onError(errors);
       actions.setSubmitting(false);
     });
   };

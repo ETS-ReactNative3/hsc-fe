@@ -67,16 +67,21 @@ class CustomModal extends React.Component {
 
   handleCallService = (data, actions) => {
     if (this.props.typeForm === 'add') {
+      console.log(this.state.fileUpload);
       HomeService.create(data).then((res) => {
+        console.log(res);
+        // console.log(this.state);
         // if (this.state.fileUpload !== null) {
+        //   console.log(res);
         //   this.handleUploadFile(res.pk, actions);
         // } else {
         //   actions.setSubmitting(false);
         //   this.handleCloseModal(res);
         // }
         actions.setSubmitting(false);
-        console.log(res);
+        // console.log(res);
       }).catch((errors) => {
+        console.log(errors);
         this.onError(errors);
         actions.setSubmitting(false);
       });
@@ -159,8 +164,9 @@ class CustomModal extends React.Component {
     console.log(id);
     const formData = new FormData();
     formData.append('id', id);
-    formData.append('fileUpload', this.state.imageEvent);
-
+    formData.append('fileUpload', this.state.fileUpload);
+    console.log(this.state.fileUpload);
+    console.log(formData);
     HomeService.uploadFile(formData, id).then((res) => {
       console.log(res);
       actions.setSubmitting(false);

@@ -3,9 +3,16 @@ import React from 'react';
 
 import { Grid, Table, Button, Icon } from 'semantic-ui-react';
 import EditorPopup from 'components/Forms/UI/Popup';
+import FlashMessage from 'components/Forms/UI/FlashMessage';
 
 import CustomModal from './Modal/index';
 import HomeService from '../../../../../shared/services/api/home/index';
+import FullModal from '../../../../../components/Modal/index';
+import { formatMessage } from '../../../../../containers/TextProvider';
+import { handleErrorMessage } from '../../../../../shared/lib/msgFormatter';
+
+let showFlashMessage = false;
+
 class Services extends React.Component {
   constructor(props) {
     super(props);
@@ -15,6 +22,7 @@ class Services extends React.Component {
       activeName: 'Viet Ngu',
       isReloadList: false,
       openModal: false,
+      openDeleteModal: false,
       tmpData: [
         { key: '1', name: 'Event 1', host: 'Xeo', date: '2019-01-12T06:00:00Z' },
         { key: '2', name: 'Event 2', host: 'BaoCH', date: '2019-01-09T06:00:00Z' },
@@ -33,6 +41,14 @@ class Services extends React.Component {
     // });
     this.loadingDataTable();
   }
+
+  onError = (errors) => {
+    const msg = handleErrorMessage(errors);
+
+    this.setState({
+      msgAlert: msg,
+    }, this.handleShowFlashMessage());
+  };
 
   loadingDataTable = () => {
     HomeService.getList({}).then((res) => {
@@ -64,6 +80,7 @@ class Services extends React.Component {
   handleCLoseModal = () => {
     this.setState({
       openModal: false,
+      openDeleteModal: false,
     }, () => this.loadingDataTable());
   }
 
@@ -79,6 +96,35 @@ class Services extends React.Component {
     });
   };
 
+  handleOpenDeleteModal = (item) => {
+    this.setState({
+      openDeleteModal: true,
+      eventItem: item,
+      messageAlert: formatMessage('confirm', 'Event', 'delete'),
+    });
+  }
+
+  handleConfirm = () => {
+    const { eventItem } = this.state;
+    if (eventItem && eventItem !== null) {
+      HomeService.deleteById(eventItem.pk).then((res) => {
+        console.log(res);
+        this.handleCLoseModal();
+        this.loadingDataTable();
+      }).catch((errors) => {
+        this.onError(errors);
+      });
+    }
+  }
+
+  handleShowFlashMessage = () => {
+    showFlashMessage = true;
+    setTimeout(() => {
+      showFlashMessage = false;
+      this.forceUpdate();
+    }, 6000);
+  };
+
   formatedDataTable = (data) => {
     const tableRows = [];
     if (data && data.length > 0) {
@@ -92,16 +138,10 @@ class Services extends React.Component {
           hasRemove
           actionEdit={() => this.handleOpenModal('edit', item)}
           actionView={() => this.handleOpenModal('view', item)}
-          actionRemove={() => console.log(`edit ${item.name}`)}
+          actionRemove={() => this.handleOpenDeleteModal(item)}
           position="bottom"
           triggerItem={<Icon name="setting" className="tbl-action-icon" circular size="large" />}
         />);
-        // const row = {
-        //   name,
-        //   host,
-        //   date,
-        //   actions,
-        // };
         const row = (
           <Table.Row key={item.key}>
             <Table.Cell>{name}</Table.Cell>
@@ -117,10 +157,12 @@ class Services extends React.Component {
   }
 
   render() {
-    const { openModal, eventsArray, eventItem, typeForm } = this.state;
+    const { openModal, openDeleteModal, eventsArray, eventItem, typeForm } = this.state;
     return (
       <div>
         <Grid className="header-list">
+          {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
           <Grid.Row>
             <Grid.Column computer={4} tablet={4} largeScreen={4} mobile={2}>
               <h2>List Events</h2>
@@ -159,6 +201,13 @@ class Services extends React.Component {
           eventItem={eventItem}
           typeForm={typeForm}
           handleReloadList={this.loadingDataTable}
+        /> : null}
+        {openDeleteModal ? <FullModal
+          title="Warning"
+          open={openDeleteModal}
+          childrens={this.state.messageAlert}
+          onConfirm={this.handleConfirm}
+          onClose={this.handleCLoseModal}
         /> : null}
         {/* <iframe title="facebook test" src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FHSC.DCGTeamjoy%2Fvideos%2F536792843472616%2F&show_text=0&width=100" width="100%" height="800px" style={{ border: 'none', overflow: 'hidden' }} scrolling="no" frameBorder="0" allowTransparency="true" allowFullScreen="true"></iframe> */}
       </div>

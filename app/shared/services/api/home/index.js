@@ -2,15 +2,15 @@ import request from '../../../lib/request';
 import { API } from '../../../constants';
 
 const create = (content) => {
+  console.log(content);
   const url = API.EVENTS;
   return request(
     {
       url,
       method: 'POST',
       event: content,
-      data: { event: JSON.stringify(content) },
+      data: { event: JSON.stringify(content), image: content.image },
       type: 'uploadFile',
-
     });
 };
 
@@ -38,7 +38,7 @@ const getList = (data) => {
 
   url += page + sort + direction + searchText;
   return request({
-    url,
+    url: `${url}?page_size=100`,
     method: 'GET',
   });
 };
@@ -52,7 +52,7 @@ const getById = (id) => request(
 const deleteById = (id) =>
   request(
     {
-      url: `${API.EVENTS}${id}`,
+      url: `${API.EVENTS}${id}/`,
       method: 'DELETE',
     });
 
@@ -82,11 +82,11 @@ const getListSubcribers = (eventId) => {
     });
 };
 
-const uploadFile = (data, id) => request(
+const uploadFile = (img, id) => request(
   {
     url: `${API.EVENTS}${id}/`,
     method: 'PATCH',
-    data,
+    data: { event: {}, image: img },
     type: 'uploadFile',
   });
 

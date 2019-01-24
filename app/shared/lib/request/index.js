@@ -31,9 +31,14 @@ const uploadFile = axios.create({
   crossdomain: true,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-    'Content-Type': 'multipart/form-data',
+    'Content-Type': 'multipart/form-data, boundary=--XXX--',
+    'Content-Disposition': 'form-data; name="uploadFile"',
     // 'Access-Control-Max-Age': 1728000,
+    // 'Access-Control-Request-Headers': '*',
     // 'Access-Control-Allow-Origin': '*',
+    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH',
+    // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, boundary',
+    // boundary: 'form-data',
   },
 });
 

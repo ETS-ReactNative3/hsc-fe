@@ -48,7 +48,7 @@ export const formatMessage = (type, name, action, customObj) => {
         msg = ` Sei sicuro di voler modificare questo ${name}?`;
         break;
       default:
-        msg = ` Sei sicuro di voler cancellare questo ${name}?`;
+        msg = ` Are you sure to delete ${name}?`;
         break;
     }
   } else {
