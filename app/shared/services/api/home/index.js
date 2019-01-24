@@ -1,15 +1,13 @@
 import request from '../../../lib/request';
 import { API } from '../../../constants';
 
-const create = (content, image) => {
-  console.log(content);
-  console.log(image);
+const create = (content) => {
   const url = API.EVENTS;
   return request(
     {
       url,
       method: 'POST',
-      data: { event: JSON.stringify(content), image },
+      data: content,
       type: 'uploadFile',
     });
 };

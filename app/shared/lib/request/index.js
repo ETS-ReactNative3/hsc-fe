@@ -28,10 +28,11 @@ const client = axios.create({
 
 const uploadFile = axios.create({
   baseURL: API.BASEURL,
-  crossdomain: true,
+  // crossdomain: true,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     'Content-Type': 'multipart/form-data',
+    // withCredentials: false,
     // 'Content-Disposition': 'form-data; name="uploadFile"',
     // 'Access-Control-Max-Age': 1728000,
     // 'Access-Control-Request-Headers': '*',
