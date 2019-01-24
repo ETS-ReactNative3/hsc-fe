@@ -68,16 +68,8 @@ class CustomModal extends React.Component {
   handleCallService = (data, actions) => {
     if (this.props.typeForm === 'add') {
       const formData = new FormData();
-      if (data.image && data.image !== null) {
-        formData.append('image', data.image);
-        formData.append('event', data.event);
-      }
-      const fileReader = new FileReader();
-      if (data.image) {
-        fileReader.readAsBinaryString(data.image);
-        console.log(data.image);
-        console.log(fileReader);
-      }
+      formData.append('image', data.image);
+      formData.append('event', data.event);
       HomeService.create(formData).then((res) => {
         console.log(res);
         // console.log(this.state);
