@@ -67,8 +67,18 @@ class CustomModal extends React.Component {
 
   handleCallService = (data, actions) => {
     if (this.props.typeForm === 'add') {
-      console.log(this.state.fileUpload);
-      HomeService.create(data).then((res) => {
+      console.log(data);
+      const formData = new FormData();
+      if (data.image && data.image !== null) {
+        formData.append('fileUpload', data.image);
+      }
+      const fileReader = new FileReader();
+      if (data.image) {
+        fileReader.readAsBinaryString(data.image);
+        console.log(data.image);
+        console.log(fileReader);
+      }
+      HomeService.create(data.event, fileReader).then((res) => {
         console.log(res);
         // console.log(this.state);
         // if (this.state.fileUpload !== null) {
@@ -117,13 +127,16 @@ class CustomModal extends React.Component {
         short_description: data.shortDescription,
         date,
         host: data.eventHost,
-        image: data.imageEvent ? data.imageEvent : null,
       };
     }
+    const dataReturn = {
+      event: formatedData,
+      image: data.imageEvent ? data.imageEvent : null,
+    };
     this.setState({
       fileUpload: data.imageEvent,
     });
-    return formatedData;
+    return dataReturn;
   };
 
   handleCloseModal = (itemSuccess) => {

@@ -31,8 +31,8 @@ const uploadFile = axios.create({
   crossdomain: true,
   headers: {
     // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
-    'Content-Type': 'multipart/form-data, boundary=--XXX--',
-    'Content-Disposition': 'form-data; name="uploadFile"',
+    'Content-Type': 'multipart/form-data',
+    // 'Content-Disposition': 'form-data; name="uploadFile"',
     // 'Access-Control-Max-Age': 1728000,
     // 'Access-Control-Request-Headers': '*',
     // 'Access-Control-Allow-Origin': '*',
