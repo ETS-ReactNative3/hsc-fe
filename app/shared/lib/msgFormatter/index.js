@@ -7,22 +7,28 @@ export const handleErrorMessage = (errors) => {
   };
   let errorMsg = '';
   if (errors.data) {
-    if (errors.data.message) {
-      errorMsg = errors.data.message;
-    } else if (errors.data.validation_messages) {
-      const validationMessage = errors.data.validation_messages;
-      const arrValidation = Object.getOwnPropertyNames(validationMessage);
-      arrValidation.forEach((item, idx) => {
-        const arrItem = Object.getOwnPropertyNames(validationMessage[item]);
-        if (idx === arrValidation.length - 1) {
-          errorMsg += `${item.toUpperCase()}: ${validationMessage[item][arrItem[0]]}.`;
-        } else {
-          errorMsg += `${item.toUpperCase()}: ${validationMessage[item][arrItem[0]]}.\n`;
-        }
-      });
-    } else {
-      errorMsg = errors.data.detail;
+    const arrItem = Object.getOwnPropertyNames(errors.data);
+    if (arrItem && arrItem.length > 0) {
+      const field = arrItem[0].split('_').join(' ');
+      const message = errors.data[arrItem[0]];
+      errorMsg = `${field}: ${message}`;
     }
+    // if (errors.data.message) {
+    //   errorMsg = errors.data.message;
+    // } else if (errors.data.validation_messages) {
+    //   const validationMessage = errors.data.validation_messages;
+    //   const arrValidation = Object.getOwnPropertyNames(validationMessage);
+    //   arrValidation.forEach((item, idx) => {
+    //     const arrItem = Object.getOwnPropertyNames(validationMessage[item]);
+    //     if (idx === arrValidation.length - 1) {
+    //       errorMsg += `${item.toUpperCase()}: ${validationMessage[item][arrItem[0]]}.`;
+    //     } else {
+    //       errorMsg += `${item.toUpperCase()}: ${validationMessage[item][arrItem[0]]}.\n`;
+    //     }
+    //   });
+    // } else {
+    //   errorMsg = errors.data.detail;
+    // }
   }
   switch (errors.status) {
     case 400:

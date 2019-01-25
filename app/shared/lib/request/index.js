@@ -28,18 +28,9 @@ const client = axios.create({
 
 const uploadFile = axios.create({
   baseURL: API.BASEURL,
-  // crossdomain: true,
+  crossdomain: true,
   headers: {
-    // Authorization: `Bearer ${localStorage.getItem('authToken')}`,
     'Content-Type': 'multipart/form-data',
-    // withCredentials: false,
-    // 'Content-Disposition': 'form-data; name="uploadFile"',
-    // 'Access-Control-Max-Age': 1728000,
-    // 'Access-Control-Request-Headers': '*',
-    // 'Access-Control-Allow-Origin': '*',
-    // 'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH',
-    // 'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization, boundary',
-    // boundary: 'form-data',
   },
 });
 
@@ -47,16 +38,11 @@ const uploadFile = axios.create({
  * Request Wrapper with default success/error actions
  */
 const request = (options) => {
-  console.log(options);
   const onSuccess = (response) => options.raw ? response : response.data;
-  // console.debug('Request Successful!', response);
-  // If options.raw is true, return all response
   const onError = (error) => {
     console.error('Request Failed:', error.config);
     if (error.response) {
       if (error.response.status === 401) {
-        // console.error('Unauthorized');
-        // store.dispatch(revokeAuthAction());
         localStorage.clear();
         // window.location.href = '/login';
       } else {
@@ -77,11 +63,11 @@ const request = (options) => {
   if (options.type === 'uploadFile') {
     return uploadFile(options)
       .then(onSuccess)
-      .catch(onError); // in realtà non catcho un bel niente perchè ritorno Promise.reject e quindi il giro ricomincia
+      .catch(onError);
   }
   return client(options)
     .then(onSuccess)
-    .catch(onError); // in realtà non catcho un bel niente perchè ritorno Promise.reject e quindi il giro ricomincia
+    .catch(onError);
 };
 
 export default request;

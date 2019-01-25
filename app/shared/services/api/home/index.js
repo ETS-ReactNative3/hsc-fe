@@ -54,7 +54,7 @@ const deleteById = (id) =>
       method: 'DELETE',
     });
 
-const update = (id, content) => request(
+const update = (content, id) => request(
   {
     url: `${API.EVENTS}${id}/`,
     method: 'PATCH',

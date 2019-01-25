@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Menu, Icon, Image, Dropdown } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-
 // import { Route, browserHistory } from 'react-router';
 // import './css/styles.css';
 

@@ -4,11 +4,11 @@ import { Formik } from 'formik';
 import { Button, Modal } from 'semantic-ui-react';
 // import _ from 'lodash';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
-
+// import moment from 'moment';
 // import OfferteService from '../../../../../../shared/services/api/offerte';
 import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
 import { mapToInitialValues } from './initialValues';
-import Validation from './validation';
+// import Validation from './validation';
 import BaseForm from './baseForm';
 import BaseFormView from './baseFormView';
 // import BaseFormView from './baseFormView';
@@ -26,14 +26,13 @@ class CustomModal extends React.Component {
       msgAlert: {},
       fileUpload: null,
     };
+    showFlashMessage = false;
   }
 
   componentWillMount() {
     this.setState({
       openModal: this.props.openModal,
     });
-
-    showFlashMessage = false;
   }
 
   componentWillReceiveProps(nextProps) {
@@ -56,7 +55,7 @@ class CustomModal extends React.Component {
     const msgAlert = handleErrorMessage(msg);
     this.setState({
       msgAlert,
-    }, () => this.handleShowFlashMessage());
+    }, this.handleShowFlashMessage());
   };
 
   onSwitchTab = (isGenerali) => {
@@ -66,33 +65,39 @@ class CustomModal extends React.Component {
   };
 
   handleCallService = (data, actions) => {
-    if (this.props.typeForm === 'add') {
-      const formData = new FormData();
+    const formData = new FormData();
+    formData.append('event', JSON.stringify(data.event));
+    if (data.image && data.image !== null) {
       formData.append('image', data.image);
-      formData.append('event', data.event);
-      HomeService.create(formData).then((res) => {
-        console.log(res);
-        // console.log(this.state);
-        // if (this.state.fileUpload !== null) {
-        //   console.log(res);
-        //   this.handleUploadFile(res.pk, actions);
-        // } else {
-        //   actions.setSubmitting(false);
-        //   this.handleCloseModal(res);
-        // }
-        actions.setSubmitting(false);
-        // console.log(res);
-      }).catch((errors) => {
-        console.log(errors);
-        this.onError(errors);
-        actions.setSubmitting(false);
-      });
-    } else {
-      // HomeService.update(this.props.eventItem.pk, data).then((res) => {
-
-      // }).catch
+    }
+    if (this.props.typeForm === 'add') {
+      this.handleCreateEvent(formData, actions);
+    } else if (this.props.typeForm === 'edit' && this.props.eventItem && this.props.eventItem.pk) {
+      this.handleUpdateEvent(formData, actions, this.props.eventItem.pk);
     }
   };
+
+  handleCreateEvent = (formData, actions) => {
+    HomeService.create(formData).then((res) => {
+      actions.setSubmitting(false);
+      this.handleCloseModal(res);
+      actions.setSubmitting(false);
+    }).catch((errors) => {
+      this.onError(errors);
+      actions.setSubmitting(false);
+    });
+  }
+
+  handleUpdateEvent = (formData, actions, id) => {
+    HomeService.update(formData, id).then((res) => {
+      actions.setSubmitting(false);
+      this.handleCloseModal(res);
+      actions.setSubmitting(false);
+    }).catch((errors) => {
+      this.onError(errors);
+      actions.setSubmitting(false);
+    });
+  }
 
   formatTypeRequest = (arrStr) => {
     let strResponse = '';
@@ -111,7 +116,10 @@ class CustomModal extends React.Component {
 
   formatDataRequest = (data) => {
     let formatedData = {};
-    const date = data.eventDate ? `${formatDateRequest(data.eventDate)}T10:10:05Z` : '';
+    let date = data.eventDate ? `${formatDateRequest(data.eventDate)}T10:10:05Z` : '';
+    if (this.props.typeForm === 'edit' && data.eventDate && data.eventDate.includes('T10:10:05Z')) {
+      date = data.eventDate ? data.eventDate : null;
+    }
     if (data) {
       formatedData = {
         name: data.name,
@@ -142,15 +150,15 @@ class CustomModal extends React.Component {
 
   handleShowFlashMessage = () => {
     showFlashMessage = true;
-    setTimeout(() => {
-      showFlashMessage = false;
-      this.forceUpdate();
-    }, 6000);
+    // setTimeout(() => {
+    //   showFlashMessage = false;
+    //   this.forceUpdate();
+    // }, 6000);
   };
 
   splitDescription = (str) => {
     if (str) {
-      const arrDes = str.split('.');
+      const arrDes = str.split('..');
       const arrResult = [];
       if (arrDes.length > 0) {
         arrDes.forEach((item) => {
@@ -165,30 +173,12 @@ class CustomModal extends React.Component {
     return null;
   }
 
-  handleUploadFile = (id, actions) => {
-    console.log(id);
-    const formData = new FormData();
-    formData.append('id', id);
-    formData.append('fileUpload', this.state.fileUpload);
-    console.log(this.state.fileUpload);
-    console.log(formData);
-    HomeService.uploadFile(formData, id).then((res) => {
-      console.log(res);
-      actions.setSubmitting(false);
-      this.handleCloseModal();
-    }).catch((errors) => {
-      this.onError(errors);
-      actions.setSubmitting(false);
-    });
-  };
-
   render() {
     const { openModal, msgAlert } = this.state;
     const { eventItem, typeForm } = this.props;
     let name = 'Add new Event';
     // const subHeader = 'Events';
     // const arrDes = this.splitDescription(eventItem.description);
-    // console.log(arrDes);
     if (typeForm === 'add') {
       name = 'Add new event';
     } else if (typeForm === 'edit') {
@@ -196,20 +186,22 @@ class CustomModal extends React.Component {
     } else {
       name = `${eventItem.name} detail`;
     }
+    console.log(showFlashMessage);
     return (
       <div>
         <Modal dimmer="blurring" open={openModal} closeOnDimmerClick={false} onClose={this.handleCloseModal} closeIcon>
+          {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
           <Modal.Header>
             <label htmlFor>{name}</label>
             {/* <h5 className="sub-header">{subHeader}</h5> */}
           </Modal.Header>
           <Modal.Content>
-            {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
 
             <Formik
               ref={(c) => { this.baseForm = c; }}
               onSubmit={this.onBaseSubmit}
-              validate={Validation}
+              // validate={Validation}
               initialValues={
                 this.props.initialValues
                   ? mapToInitialValues(this.props.initialValues)

@@ -5,7 +5,6 @@ import {
 import { BACKEND_CONFIG, FRONTEND_CONFIG } from '../../configs';
 
 export const execAuthenticate = (data) => (dispatch) => {
-  console.log(dispatch);
   const url = `${BACKEND_CONFIG.URL}/oauth`;
   const obj = {
     grant_type: 'password',

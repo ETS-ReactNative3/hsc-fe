@@ -33,9 +33,7 @@ Auth.propTypes = {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
   const authObj = state.get('auth').toJS();
-  console.log(authObj);
   return {
     authStatus: authObj.authenticate.status,
     authenticate: authObj.authenticate,

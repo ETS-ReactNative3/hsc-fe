@@ -4,7 +4,7 @@ import React from 'react';
 import { Grid, Table, Button, Icon } from 'semantic-ui-react';
 import EditorPopup from 'components/Forms/UI/Popup';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
-
+import moment from 'moment';
 import CustomModal from './Modal/index';
 import HomeService from '../../../../../shared/services/api/home/index';
 import FullModal from '../../../../../components/Modal/index';
@@ -57,7 +57,7 @@ class Services extends React.Component {
         eventsArray: this.formatedDataTable(listItems),
       });
     }).catch((error) => {
-      console.log(error);
+      this.onError(error);
     });
   }
 
@@ -131,7 +131,7 @@ class Services extends React.Component {
       data.forEach((item) => {
         const name = item.name;
         const host = item.host.name;
-        const date = item.date;
+        const date = item.date ? moment(item.date).format('DD/MM/YYYY') : '';
         const actions = (<EditorPopup
           hasEdit
           hasView

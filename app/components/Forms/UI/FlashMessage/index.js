@@ -10,7 +10,7 @@ class FlashMessage extends Component {
   }
   render() {
     const info = this.props.info;
-    const className = info.isSuccess ? 'defaultStyle success' : 'defaultStyle negative';
+    const className = info.isSuccess ? 'defaultStyle' : 'defaultStyle negative';
     let icon = 'circle outline';
     if (info.icon) {
       icon += ' ';

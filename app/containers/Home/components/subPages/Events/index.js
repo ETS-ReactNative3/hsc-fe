@@ -11,12 +11,21 @@ import banner3 from 'images/Banner3.png';
 import banner5 from 'images/Banner5.png';
 import banner6 from 'images/Banner6.png';
 import banner7 from 'images/Banner7.jpg';
-import banner8 from 'images/Banner8.jpg';
-import banner9 from 'images/Banner9.png';
+import banner10 from 'images/Banner10.png';
+import banner11 from 'images/Banner11.png';
+import banner12 from 'images/Banner12.jpg';
+import banner13 from 'images/Banner13.png';
+import banner14 from 'images/Banner14.jpg';
+import banner15 from 'images/Banner15.jpg';
+import banner16 from 'images/Banner16.png';
+import banner17 from 'images/Banner17.jpg';
+import banner18 from 'images/Banner18.jpg';
+import banner19 from 'images/Banner19.png';
+import banner20 from 'images/Banner20.png';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
 
 // import CustomGrid from '../../../components/CustomGrid';
-import { handleErrorMessage } from '../../../../../shared/lib/msgFormatter';
+import { handleErrorMessage, handleSuccessMessage } from '../../../../../shared/lib/msgFormatter';
 
 import CustomModal from './Modal/index';
 import HomeService from '../../../../../shared/services/api/home/index';
@@ -38,6 +47,20 @@ class Events extends React.Component {
         { key: 4, id: 4, name: '💼 LÀM SAO ĐỂ KIẾM TIỀN TỪ PHÁI SINH 💼', imgUrl: banner7, description: '💱 PHÁI SINH: kênh đầu tư hiệu quả cao với số vốn đầu tư nhỏ. 💱 Chi phí giao dịch cực thấp so với các loại hình chứng khoán khác. LỢI NHUẬN LỚN NHƯNG CŨNG TIỀM ẨN NHIỀU RỦI RO! Vì vậy, HSC DCG TEAMJOY tổ chức buổi hội thảo LÀM SAO ĐỂ KIẾM TIỀN TỪ PHÁI SINH 📊 Để giúp bạn hiểu rõ hơn về Chứng khoán Phái sinh. 📊 Biết cách mở tài khoản, giao dịch online. 📊 Nắm được chìa khóa giao dịch thành công. ===================================. Thời gian: 20h, 10/01/2018. Địa điểm: Hội thảo online (Vé tham dự sẽ được gửi qua email)' },
         { key: 5, id: 5, name: ' NHẬN ĐỊNH TT CHỨNG KHOÁN PHÁI SINH NGÀY 07/01/2019', imgUrl: banner2 },
       ],
+      arrImage: [
+        banner3,
+        banner10,
+        banner11,
+        banner12,
+        banner13,
+        banner14,
+        banner15,
+        banner16,
+        banner17,
+        banner18,
+        banner19,
+        banner20,
+      ],
       listItems: [],
       openModal: false,
     };
@@ -46,13 +69,24 @@ class Events extends React.Component {
   componentWillMount() {
     showFlashMessage = false;
     this.loadingDataTable();
+    this.prepareCarouselData();
   }
 
   onError = (msg) => {
     const msgAlert = handleErrorMessage(msg);
     this.setState({
       msgAlert,
-    }, () => this.handleShowFlashMessage());
+    }, this.handleShowFlashMessage());
+  };
+
+  handleReturnMessage = (name, typeAction) => {
+    const msg = handleSuccessMessage(name, typeAction);
+    this.setState(
+      {
+        msgAlert: msg,
+        isLoading: true,
+        openDeleteConfirm: false,
+      }, this.handleShowFlashMessage());
   };
 
   loadingDataTable = () => {
@@ -71,7 +105,6 @@ class Events extends React.Component {
     const results = [];
     if (listEvents && listEvents.length > 0) {
       listEvents.forEach((item, idx) => {
-        console.log(item);
         const gridItem = {
           key: `${item.pk}-${idx}`,
           id: item.pk,
@@ -128,12 +161,28 @@ class Events extends React.Component {
     }, 6000);
   };
 
+  prepareCarouselData = () => {
+    const { arrImage } = this.state;
+    const results = [];
+    arrImage.forEach((item, idx) => {
+      const altId = `car${idx}`;
+      const carItem = (
+        <div key={altId}>
+          <img alt={altId} src={item} />
+          {/* <p className="legend">Legend 1</p> */}
+        </div>
+      );
+      results.push(carItem);
+    });
+    this.setState({
+      arrCarousel: results,
+    });
+  }
+
   render() {
-    const { openModal, eventItem, listItems } = this.state;
+    const { openModal, eventItem, listItems, arrCarousel, msgAlert } = this.state;
     return (
       <div>
-        {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
-
         <Grid className="header-list">
           <Grid.Row>
             {/* <Grid.Column computer={2} tablet={2} largeScreen={1} mobile={2}>
@@ -146,26 +195,19 @@ class Events extends React.Component {
           </Grid.Row>
         </Grid>
         <Carousel>
-          <div>
-            <img alt="car1" src={banner9} />
-            {/* <p className="legend">Legend 1</p> */}
-          </div>
-          <div>
-            <img alt="car2" src={banner8} />
-            {/* <p className="legend">Legend 2</p> */}
-          </div>
-          <div>
-            <img alt="car3" src={banner3} />
-            {/* <p className="legend">Legend 3</p> */}
-          </div>
+          {arrCarousel}
         </Carousel>
         <CustomGrid listItem={listItems} clickToOpen={this.handleOpenModal} />
+        {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
         {openModal ? <CustomModal
           ref={(el) => { this.form = el; }}
           handleOpenModal={this.handleOpenModal}
           closeModal={this.handleCLoseModal}
           openModal={openModal}
           eventItem={eventItem}
+          onError={this.onError}
+          handleReturnMessage={this.handleReturnMessage}
         /> : null}
       </div>
     );

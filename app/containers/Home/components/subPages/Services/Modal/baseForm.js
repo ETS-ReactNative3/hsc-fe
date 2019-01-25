@@ -11,7 +11,7 @@ import { CustomDropdown } from 'components/Forms/UI/Dropdown';
 
 
 // import DatePicker from 'react-datepicker';
-// import { moment } from 'moment';
+import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 import { CustomUpload } from 'components/Forms/UI/Input/uploadFile';
 
@@ -88,6 +88,7 @@ class BaseForm extends React.Component {
     const name = response.name ? response.name : '';
     const description = response.description ? response.description : '';
     const dateRes = response.date ? response.date : null;
+    const tmpDate = moment(dateRes).format('DD/MM/YYYY');
     const hostPk = _.get(response, 'host.pk', '');
     const shortDescription = response.short_description ? response.short_description : '';
     this.setState({
@@ -95,7 +96,7 @@ class BaseForm extends React.Component {
       description,
       shortDescription,
       eventHost: hostPk,
-      eventDate: dateRes,
+      eventDate: tmpDate,
     });
     this.props.setFieldValue('name', name);
     this.props.setFieldValue('description', description);

@@ -3,9 +3,9 @@
   position: fixed;
   width: 50%!important;
   margin: auto;
-  top: 0;
-  right: 0;
-  z-index: 10000;
+  top: 50px;
+  right: 25px;
+  z-index: 999999;
   -webkit-animation: display 6s;
   -webkit-animation-delay: 0s;
   animation: display 5s;

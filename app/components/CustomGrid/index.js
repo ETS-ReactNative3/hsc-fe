@@ -26,9 +26,8 @@ export class CustomGrid extends React.Component {
     const gridData = this.props.listItem;
     const arrData = [];
     gridData.forEach((item, idx) => {
-      const date = moment(item.date).format('d MMMM');
+      const date = moment(item.date).format('DD MMMM');
       const image = item.imgUrl;
-      console.log(image);
       const logo = image !== null ? image : NoImage;
       const styleImage = image === null ? { maxHeight: '250px' } : { maxHeight: '270px' };
       const columnGrid = (

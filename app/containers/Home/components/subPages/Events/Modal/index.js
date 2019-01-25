@@ -1,14 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
-import { Button, Modal, Image } from 'semantic-ui-react';
+import { Button, Modal, Image, Label } from 'semantic-ui-react';
 // import _ from 'lodash';
 import FlashMessage from 'components/Forms/UI/FlashMessage';
 
 // import OfferteService from '../../../../../../shared/services/api/offerte';
 import { handleErrorMessage } from '../../../../../../shared/lib/msgFormatter';
 import { mapToInitialValues } from './initialValues';
-import Validation from './validation';
+// import Validation from './validation';
 import BaseForm from './baseForm';
 import HomeService from '../../../../../../shared/services/api/home/index';
 
@@ -63,7 +63,7 @@ class CustomModal extends React.Component {
   handleCallService = (data, actions) => {
     // ToDo
     HomeService.addNewSubcriber(this.props.eventItem.id, data).then((res) => {
-      // this.props.handleReturnMessage('Offerte', 'add');
+      this.props.handleReturnMessage('Subcriber', 'add');
       actions.setSubmitting(false);
       this.handleCloseModal(res);
     }).catch((errors) => {
@@ -141,9 +141,8 @@ class CustomModal extends React.Component {
     const { openModal, msgAlert } = this.state;
     const { eventItem } = this.props;
     const name = eventItem.name;
-    const subHeader = 'Events';
+    // const subHeader = eventItem.host ? `Host: ${eventItem.host.name}` : 'Event';
     const arrDes = this.splitDescription(eventItem.description);
-    console.log(arrDes);
     // if (typeForm === 'add') {
     //   name = 'Add event';
     // } else if (typeForm === 'edit') {
@@ -154,19 +153,21 @@ class CustomModal extends React.Component {
     return (
       <div>
         <Modal dimmer="blurring" open={openModal} closeOnDimmerClick={false} onClose={this.handleCloseModal} closeIcon>
+          {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
+
           <Modal.Header>
             <label htmlFor>{name}</label>
-            <h5 className="sub-header">{subHeader}</h5>
+            {/* <h5 className="sub-header">{subHeader}</h5> */}
           </Modal.Header>
 
           <Modal.Content image scrolling>
             <Image size="big" style={{ margin: '0 auto' }} src={eventItem.imgUrl} wrapped />
-            {showFlashMessage ? <FlashMessage info={msgAlert} /> : null}
             <Modal.Description>
               {/* <Header>{eventItem.name}</Header> */}
               <div className="event-description">
                 {/* {eventItem.description} */}
                 {arrDes}
+                <Label htmlFor="hostname" style={{ display: 'block', float: 'right' }}>Host: {eventItem.host.name}</Label>
               </div>
             </Modal.Description>
           </Modal.Content>
@@ -175,7 +176,7 @@ class CustomModal extends React.Component {
             <Formik
               ref={(c) => { this.baseForm = c; }}
               onSubmit={this.onBaseSubmit}
-              validate={Validation}
+              // validate={Validation}
               initialValues={
                 this.props.initialValues
                   ? mapToInitialValues(this.props.initialValues)
@@ -217,7 +218,8 @@ CustomModal.propTypes = {
   closeModal: PropTypes.func,
   eventItem: PropTypes.object,
   // selectedId: PropTypes.string,
-  // handleReturnMessage: PropTypes.func,
+  handleReturnMessage: PropTypes.func,
+  // onError: PropTypes.func,
   // data: PropTypes.object,
   // callServiceDropDownList: PropTypes.func,
 };
