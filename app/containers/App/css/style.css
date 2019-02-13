@@ -28,3 +28,11 @@
     height: 400px;
 }
 
+img.ui.image.ads_image {
+    display: block;
+    position: fixed;
+    top: 100px;
+    left: 0;
+    width: 14%;
+}
+

@@ -10,7 +10,7 @@ injectGlobal`
     --tk-detail-color: white;
     --cmt-color: white;
     --cmt-bg-color: white;
-    --font-family: Lato;
+    --font-family: Arial, Helvetica, sans-serif;
     --layout-main-color: #3078C5;
   }
 

@@ -66,7 +66,7 @@ export class Login extends React.Component {
       <Grid className="container-login">
         <Grid.Row className="main-form">
           <Grid.Column width={16} className="logo">
-            <img src="/logohsc.png" width={150} height={90} alt={''} style={{ margin: '5px' }} />
+            <img src="/logoteamjoy.png" width={150} height={90} alt={''} style={{ margin: '5px' }} />
           </Grid.Column>
           <Grid.Column width={16}>
             <Formik

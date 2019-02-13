@@ -11,18 +11,20 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 // import { Redirect } from 'react-router';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 import CustomMenu from 'components/Menu';
 import PureTicker from 'components/PureTicker';
+import AdsLeft from 'images/left_ad.jpg';
 // import CustomLogout from 'components/DropdownLogout';
 import { execRevokeAuth } from '../Auth/actions';
 import Anagrafiche from '../Anagrafiche/Loadable';
 import Home from '../Home/Loadable';
 // import Auth from '../Auth/Loadable';
 import './css/style.css';
+import Feature from '../Features/index';
 
 const AppWrapper = styled.div`
   // max-width: calc(768px + 156px * 2);
@@ -92,6 +94,8 @@ class App extends React.Component {
       return <Anagrafiche />;
     } else if (routeType === '/home') {
       return <Home />;
+    } else if (routeType === '/features') {
+      return <Feature />;
     }
     return true;
   }
@@ -143,6 +147,7 @@ class App extends React.Component {
                 </Grid.Row> */}
                 <Grid.Row columns={3} >
                   <Grid.Column computer={5} tablet={5} largeScreen={5} mobile={5} className="app-left-container">
+                    <Image className="ads_image" alt="ads_left" src={AdsLeft} />
                   </Grid.Column>
                   <Grid.Column computer={6} tablet={6} largeScreen={6} mobile={6} className="app-center-container">
                     <div style={{ marginTop: '80px', marginBottom: '50px' }}>
@@ -156,6 +161,20 @@ class App extends React.Component {
                 </Grid.Row>
               </Grid.Column>
               <PureTicker tickerData={tickerData} />
+              <Grid.Column width={16} style={{ backgroundColor: '#3f3f3f', width: '100%', height: '150px', color: 'white' }}>
+                <Grid.Row columns={3}>
+                  <Grid.Column computer={5} tablet={5} largeScreen={5} mobile={16} style={{ width: '40%', float: 'left', textAlign: 'right' }}>
+                    <p style={{ fontSize: '1.2em', paddingTop: '5px', color: 'antiquewhite' }}>PHÒNG GIAO DỊCH NAM SÀI GÒN</p>
+                    <p>Tầng 9, Tòa nhà Etown, 11 Đoàn Văn Bơ, Quận 4, TP.HCM</p>
+                    <p>Tel: <a href="tel:+84838293826" style={{ color: 'antiquewhite' }}>+84 8 3829 3826</a> | Fax: <a href="tel:+84838233301" style={{ color: 'antiquewhite' }}>+84 8 3823 3301</a> | Website: <a href="www.hsc.com.vn" style={{ color: 'antiquewhite' }}>www.hsc.com.vn</a></p>
+                  </Grid.Column>
+                  <Grid.Column computer={6} tablet={6} largeScreen={6} mobile={6} style={{ width: '47%', float: 'left', textAlign: 'left' }}>
+                    <p style={{ fontSize: '1.2em', paddingTop: '5px' }}>Công ty Chứng khoán tốt nhất & Đội ngũ Nghiên cứu Phân tích hàng đầu Việt Nam
+                    Được bầu chọn qua Asiamoney, The Asset, FinanceAsia, Institutional Investor và Thomson Reuters
+                    Top 50 Công ty Niêm yết tại Việt Nam - Được bầu chọn bởi Tạp chí Forbes Vietnam và Nhịp Cầu Đầu Tư</p>
+                  </Grid.Column>
+                </Grid.Row>
+              </Grid.Column>
             </Grid.Row>
           </Grid>
         </div>

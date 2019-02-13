@@ -1,10 +1,10 @@
 import React from 'react';
 // import PropTypes from 'prop-types';
 import { Grid, Image } from 'semantic-ui-react';
-import StockMarket from 'images/stockMarket.jpg';
+import StockMarket from 'images/Note.jpg';
 import './css/styles.css';
 
-class AnagraficheTab extends React.Component {
+class FeatureTab extends React.Component {
   constructor(props) {
     super(props);
     this.props = props;
@@ -48,8 +48,8 @@ class AnagraficheTab extends React.Component {
   }
 }
 
-AnagraficheTab.propTypes = {
+FeatureTab.propTypes = {
   // elementId: PropTypes.string,
 };
 
-export default AnagraficheTab;
+export default FeatureTab;

@@ -59,7 +59,7 @@ class CustomMenu extends Component {
       activeMenu = 'editorials';
     }
     const listMenu = [];
-    const widthMenuItem = 65 / this.props.listItem.length;
+    const widthMenuItem = 75 / this.props.listItem.length;
     this.props.listItem.map((menuItem) => {
       const itemInMenu = (
         <Menu.Item
@@ -82,14 +82,15 @@ class CustomMenu extends Component {
       <Menu icon="labeled" stackable={false}>
         <Menu.Item
           onClick={this.handleDisplayMenu}
-          style={{ margin: -1, marginBottom: 1, width: '25%' }}
+          style={{ margin: -1, marginBottom: 1, width: '10%' }}
         >
-          <Image alt={'Logo'} src="/logohsc.png" />
+          <Image alt={'Logo'} src="/logoteamjoy.png" style={{ height: '54px' }} />
         </Menu.Item>
         {listMenu}
-        <Dropdown text={`${this.props.userName}\nDCG Teamjoy`} pointing className="link item" style={{ width: '10%' }}>
+        <Dropdown text={`${this.props.userName}\nDCG Teamjoy`} pointing className="link item" style={{ width: '15%' }}>
+          {/* {Clock} */}
           <Dropdown.Menu>
-            <Dropdown.Header><Image alt={'teamjoy'} src="/DCG_Teamjoy.jpg" />{this.props.userRole}</Dropdown.Header>
+            <Dropdown.Header><Image alt={'teamjoy'} src="/jenny.jpg" />{this.props.userRole}</Dropdown.Header>
             <Dropdown.Divider />
             <Dropdown.Item>Log out</Dropdown.Item>
           </Dropdown.Menu>
